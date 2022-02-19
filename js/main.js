@@ -7,10 +7,10 @@ function getRandomInteger(min, max) {
     return min;
   }
 
-  return Math.random() * (max + 1 - min) + min;
+  return  Math.floor(Math.random() * (max + 1 - min) + min);
 }
 
-getRandomInteger();
+getRandomInteger(5, 10);
 
 function getRandomFloat(min, max, decimalCount) {
   const decimalFactor = Math.pow(10, decimalCount);
@@ -21,4 +21,4 @@ function getRandomFloat(min, max, decimalCount) {
   return getRandomInteger(min, max) / decimalFactor;
 }
 
-getRandomFloat();
+getRandomFloat(5.3, 5.4, 5);
