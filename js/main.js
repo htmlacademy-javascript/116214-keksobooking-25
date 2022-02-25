@@ -27,7 +27,7 @@ function getRandomPositiveFloat(a, b, digits = 1) {
 getRandomPositiveFloat(5.3, 5.4, 5);
 
 const similarAdds = Array.from({length: SIMILAR_ADDS_COUNT}, getSimilarAdd);
-console.log(similarAdds);
+similarAdds.sort();
 
 function getSimilarAdd() {
   return {
