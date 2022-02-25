@@ -1,5 +1,6 @@
 const SIMILAR_ADDS_COUNT = 10;
 const userIds = [];
+const addTypes = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
 
 function getRandomPositiveInteger(a, b) {
   const lower = Math.ceil(Math.min(Math.abs(a), Math.abs(b)));
@@ -48,11 +49,15 @@ function getUserId() {
   return userId;
 }
 
+function getPrice() {
+  return getRandomPositiveInteger(100, 1000);
+}
+
 function getOffer() {
   return {
     title: 'title',
     address: 'address',
-    price: 'price',
+    price: getPrice(),
     type: 'type',
     rooms: 'rooms',
     guests: 'guests',
