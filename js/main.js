@@ -1,3 +1,6 @@
+const SIMILAR_ADDS_COUNT = 10;
+const userIds = [];
+
 function getRandomPositiveInteger(a, b) {
   const lower = Math.ceil(Math.min(Math.abs(a), Math.abs(b)));
   const upper = Math.floor(Math.max(Math.abs(a), Math.abs(b)));
@@ -15,3 +18,5 @@ function getRandomPositiveFloat(a, b, digits = 1) {
 }
 
 getRandomPositiveFloat(5.3, 5.4, 5);
+
+const similarAdds = Array.from({length: SIMILAR_ADDS_COUNT}, getSimilarAdd);
