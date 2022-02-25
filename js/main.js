@@ -24,9 +24,16 @@ console.log(similarAdds);
 
 function getSimilarAdd() {
   return {
-    author: 'author',
+    author: getAuthor(),
     offer: 'offer',
     location: 'location'
   };
 }
+
+function getAuthor() {
+  return {
+    avatar: `img/avatars/user${getUserId()}.png`
+  };
+}
+
 
