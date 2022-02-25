@@ -33,7 +33,7 @@ function getSimilarAdd() {
   return {
     author: getAuthor(),
     offer: getOffer(),
-    location: 'location'
+    location: getLocation()
   };
 }
 
@@ -97,5 +97,12 @@ function getOffer() {
     features: getFeatures(),
     description: 'description',
     photos: getPhotos()
+  };
+}
+
+function getLocation() {
+  return {
+    lat: 'lat',
+    lng: 'lng'
   };
 }
