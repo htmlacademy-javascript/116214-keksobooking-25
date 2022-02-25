@@ -102,7 +102,11 @@ function getOffer() {
 
 function getLocation() {
   return {
-    lat: 'lat',
+    lat: getLatitude(),
     lng: 'lng'
   };
+}
+
+function getLatitude() {
+  return getRandomPositiveFloat(35.65, 35.7, 5);
 }
