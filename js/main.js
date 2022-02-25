@@ -2,6 +2,11 @@ const SIMILAR_ADDS_COUNT = 10;
 const userIds = [];
 const addTypes = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
 const features = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator'];
+const photos = [
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
+];
 
 function getRandomPositiveInteger(a, b) {
   const lower = Math.ceil(Math.min(Math.abs(a), Math.abs(b)));
@@ -75,6 +80,10 @@ function getFeatures() {
   return features.slice(getRandomPositiveInteger(0, features.length - 1));
 }
 
+function getPhotos() {
+  return photos.slice(getRandomPositiveInteger(0, photos.length - 1));
+}
+
 function getOffer() {
   return {
     title: 'title',
@@ -87,6 +96,6 @@ function getOffer() {
     checkout: getRandomTime(),
     features: getFeatures(),
     description: 'description',
-    photos: 'photos'
+    photos: getPhotos()
   };
 }
