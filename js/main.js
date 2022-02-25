@@ -57,13 +57,17 @@ function getAddType() {
   return addTypes[getRandomPositiveInteger(0, addTypes.length - 1)];
 }
 
+function getRooms() {
+  return getRandomPositiveInteger(1, 10);
+}
+
 function getOffer() {
   return {
     title: 'title',
     address: 'address',
     price: getPrice(),
     type: getAddType(),
-    rooms: 'rooms',
+    rooms: getRooms(),
     guests: 'guests',
     checkin: 'checkin',
     checkout: 'checkout',
