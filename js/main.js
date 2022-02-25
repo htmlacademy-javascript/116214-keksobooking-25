@@ -87,7 +87,7 @@ function getPhotos() {
 function getOffer() {
   return {
     title: 'title',
-    address: 'address',
+    address: getAddress(),
     price: getPrice(),
     type: getAddType(),
     rooms: getRooms(),
@@ -113,4 +113,8 @@ function getLatitude() {
 
 function getLongitude() {
   return getRandomPositiveFloat(139.7, 139.8, 5);
+}
+
+function getAddress() {
+  return `${getLatitude()}, ${getLongitude()}`;
 }
