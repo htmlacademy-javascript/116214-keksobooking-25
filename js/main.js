@@ -1,16 +1,11 @@
-function getRandomInteger(min, max) {
-  if (min < 0) {
-    min = 0;
-  }
-
-  if (max <= min) {
-    return min;
-  }
-
-  return  Math.floor(Math.random() * (max + 1 - min) + min);
+function getRandomPositiveInteger(a, b) {
+  const lower = Math.ceil(Math.min(Math.abs(a), Math.abs(b)));
+  const upper = Math.floor(Math.max(Math.abs(a), Math.abs(b)));
+  const result = Math.random() * (upper - lower + 1) + lower;
+  return  Math.floor(result);
 }
 
-getRandomInteger(5, 10);
+getRandomPositiveInteger(5, 10);
 
 function getRandomFloat(min, max, decimalCount) {
   const decimalFactor = Math.pow(10, decimalCount);
