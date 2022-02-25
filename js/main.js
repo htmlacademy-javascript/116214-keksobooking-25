@@ -36,4 +36,14 @@ function getAuthor() {
   };
 }
 
-
+function getUserId() {
+  let userId;
+  do {
+    userId = getRandomPositiveInteger(1, 10);
+    if (userId < 10) {
+      userId = userId.toString().padStart(2, '0');
+    }
+  } while (userIds.includes(userId));
+  userIds.push(userId);
+  return userId;
+}
