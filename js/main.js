@@ -61,6 +61,10 @@ function getRooms() {
   return getRandomPositiveInteger(1, 10);
 }
 
+function getGuests() {
+  return getRandomPositiveInteger(1, 20);
+}
+
 function getOffer() {
   return {
     title: 'title',
@@ -68,7 +72,7 @@ function getOffer() {
     price: getPrice(),
     type: getAddType(),
     rooms: getRooms(),
-    guests: 'guests',
+    guests: getGuests(),
     checkin: 'checkin',
     checkout: 'checkout',
     features: 'features',
