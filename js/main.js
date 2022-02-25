@@ -25,7 +25,7 @@ console.log(similarAdds);
 function getSimilarAdd() {
   return {
     author: getAuthor(),
-    offer: 'offer',
+    offer: getOffer(),
     location: 'location'
   };
 }
@@ -46,4 +46,20 @@ function getUserId() {
   } while (userIds.includes(userId));
   userIds.push(userId);
   return userId;
+}
+
+function getOffer() {
+  return {
+    title: 'title',
+    address: 'address',
+    price: 'price',
+    type: 'type',
+    rooms: 'rooms',
+    guests: 'guests',
+    checkin: 'checkin',
+    checkout: 'checkout',
+    features: 'features',
+    description: 'description',
+    photos: 'photos'
+  };
 }
