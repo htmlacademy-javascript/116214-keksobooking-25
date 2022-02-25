@@ -65,6 +65,11 @@ function getGuests() {
   return getRandomPositiveInteger(1, 20);
 }
 
+function getRandomTime() {
+  const hour = getRandomPositiveInteger(12, 14);
+  return hour.toString().concat(':00');
+}
+
 function getOffer() {
   return {
     title: 'title',
@@ -73,8 +78,8 @@ function getOffer() {
     type: getAddType(),
     rooms: getRooms(),
     guests: getGuests(),
-    checkin: 'checkin',
-    checkout: 'checkout',
+    checkin: getRandomTime(),
+    checkout: getRandomTime(),
     features: 'features',
     description: 'description',
     photos: 'photos'
