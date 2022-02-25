@@ -1,6 +1,7 @@
 const SIMILAR_ADDS_COUNT = 10;
 const userIds = [];
 const addTypes = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
+const features = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator'];
 
 function getRandomPositiveInteger(a, b) {
   const lower = Math.ceil(Math.min(Math.abs(a), Math.abs(b)));
@@ -70,6 +71,10 @@ function getRandomTime() {
   return hour.toString().concat(':00');
 }
 
+function getFeatures() {
+  return features.slice(getRandomPositiveInteger(0, features.length - 1));
+}
+
 function getOffer() {
   return {
     title: 'title',
@@ -80,7 +85,7 @@ function getOffer() {
     guests: getGuests(),
     checkin: getRandomTime(),
     checkout: getRandomTime(),
-    features: 'features',
+    features: getFeatures(),
     description: 'description',
     photos: 'photos'
   };
