@@ -44,15 +44,13 @@ function getAuthor() {
 }
 
 function getUserId() {
-  let userId;
-  do {
-    userId = getRandomPositiveInteger(1, 10).toString();
-    if (userId < 10) {
-      userId = userId.padStart(2, '0');
-    }
-  } while (userIds.includes(userId));
-  userIds.push(userId);
-  return userId;
+  let userId = getRandomPositiveInteger(1, 10);
+  userId = userId < 10 ?
+    userId.toString().padStart(2, '0') :
+    userId.toString();
+  return !userIds.includes(userId) ?
+    userIds.push(userId) && userId :
+    getUserId();
 }
 
 function getPrice() {
