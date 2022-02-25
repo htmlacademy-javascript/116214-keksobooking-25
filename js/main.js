@@ -7,13 +7,11 @@ function getRandomPositiveInteger(a, b) {
 
 getRandomPositiveInteger(5, 10);
 
-function getRandomFloat(min, max, decimalCount) {
-  const decimalFactor = Math.pow(10, decimalCount);
-
-  min = Math.round(min * decimalFactor);
-  max = Math.round(max * decimalFactor);
-
-  return getRandomInteger(min, max) / decimalFactor;
+function getRandomPositiveFloat(a, b, digits = 1) {
+  const lower = Math.min(Math.abs(a), Math.abs(b));
+  const upper = Math.max(Math.abs(a), Math.abs(b));
+  const result = Math.random() * (upper - lower) + lower;
+  return +result.toFixed(digits);
 }
 
-getRandomFloat(5.3, 5.4, 5);
+getRandomPositiveFloat(5.3, 5.4, 5);
