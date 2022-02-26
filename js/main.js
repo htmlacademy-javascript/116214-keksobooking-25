@@ -34,13 +34,7 @@ const getUserId = () => {
 
 const getAuthor = () => ({avatar: `img/avatars/user${getUserId()}.png`});
 
-const getPrice = () => getRandomPositiveInteger(100, 1000);
-
 const getRealtyType = () => realtyTypes[getRandomPositiveInteger(0, realtyTypes.length - 1)];
-
-const getRooms = () => getRandomPositiveInteger(1, 10);
-
-const getGuests = () => getRandomPositiveInteger(1, 20);
 
 const getRandomTime = () => {
   const hour = getRandomPositiveInteger(12, 14);
@@ -51,22 +45,18 @@ const getFeatures = () => features.slice(getRandomPositiveInteger(0, features.le
 
 const getPhotos = () => photos.slice(getRandomPositiveInteger(0, photos.length - 1));
 
-const getLatitude = () => getRandomPositiveFloat(35.65, 35.7, 5);
-
-const getLongitude = () => getRandomPositiveFloat(139.7, 139.8, 5);
-
 const getLocation = () => ({
-  lat: getLatitude(),
-  lng: getLongitude()
+  lat: getRandomPositiveFloat(35.65, 35.7, 5),
+  lng: getRandomPositiveFloat(139.7, 139.8, 5)
 });
 
 const getOffer = () => ({
   title: 'title',
   address: '',
-  price: getPrice(),
+  price: getRandomPositiveInteger(100, 1000),
   type: getRealtyType(),
-  rooms: getRooms(),
-  guests: getGuests(),
+  rooms: getRandomPositiveInteger(1, 10),
+  guests: getRandomPositiveInteger(1, 20),
   checkin: getRandomTime(),
   checkout: getRandomTime(),
   features: getFeatures(),
