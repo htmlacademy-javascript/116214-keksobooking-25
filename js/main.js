@@ -72,7 +72,7 @@ const getOffer = () => ({
   photos: getPhotos()
 });
 
-const getSimilarAdd = () => {
+const generateMockData = () => {
   const add = {
     author: getAuthor(),
     offer: getOffer(),
@@ -82,6 +82,6 @@ const getSimilarAdd = () => {
   return add;
 };
 
-const similarAdds = Array.from({length: SIMILAR_ADDS_COUNT}, getSimilarAdd);
+const similarAdds = Array.from({length: SIMILAR_ADDS_COUNT}, generateMockData);
 console.log(similarAdds);
 similarAdds.sort();
