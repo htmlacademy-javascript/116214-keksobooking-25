@@ -25,9 +25,11 @@ const getRandomPositiveFloat = (num1, num2, digits = 1) => {
 const getUserId = () => {
   let userId = getRandomPositiveInteger(1, 10);
   userId = `0${userId}`.slice(-2);
-  return userIds.includes(userId) ?
-    getUserId() :
-    userIds.push(userId) && userId;
+  if (userIds.includes(userId)) {
+    return getUserId();
+  }
+  userIds.push(userId);
+  return userId;
 };
 
 const getAuthor = () => ({avatar: `img/avatars/user${getUserId()}.png`});
