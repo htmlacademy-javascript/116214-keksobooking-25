@@ -36,7 +36,7 @@ const getAuthor = () => ({avatar: `img/avatars/user${getUserId()}.png`});
 
 const getPrice = () => getRandomPositiveInteger(100, 1000);
 
-const getRealtyTypes = () => realtyTypes[getRandomPositiveInteger(0, realtyTypes.length - 1)];
+const getRealtyType = () => realtyTypes[getRandomPositiveInteger(0, realtyTypes.length - 1)];
 
 const getRooms = () => getRandomPositiveInteger(1, 10);
 
@@ -64,7 +64,7 @@ const getOffer = () => ({
   title: 'title',
   address: '',
   price: getPrice(),
-  type: getRealtyTypes(),
+  type: getRealtyType(),
   rooms: getRooms(),
   guests: getGuests(),
   checkin: getRandomTime(),
