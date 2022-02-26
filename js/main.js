@@ -24,9 +24,7 @@ const getRandomPositiveFloat = (num1, num2, digits = 1) => {
 
 const getUserId = () => {
   let userId = getRandomPositiveInteger(1, 10);
-  userId = userId < 10 ?
-    userId.toString().padStart(2, '0') :
-    userId.toString();
+  userId = `0${userId}`.slice(-2);
   return !userIds.includes(userId) ?
     userIds.push(userId) && userId :
     getUserId();
