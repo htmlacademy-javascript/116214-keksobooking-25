@@ -17,10 +17,10 @@ function getRandomPositiveInteger(num1, num2) {
 
 getRandomPositiveInteger(5, 10);
 
-function getRandomPositiveFloat(a, b, digits = 1) {
-  const lower = Math.min(Math.abs(a), Math.abs(b));
-  const upper = Math.max(Math.abs(a), Math.abs(b));
-  const result = Math.random() * (upper - lower) + lower;
+function getRandomPositiveFloat(num1, num2, digits = 1) {
+  const min = Math.min(Math.abs(num1), Math.abs(num2));
+  const max = Math.max(Math.abs(num1), Math.abs(num2));
+  const result = Math.random() * (max - min) + min;
   return +result.toFixed(digits);
 }
 
