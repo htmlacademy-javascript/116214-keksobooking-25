@@ -22,17 +22,6 @@ const getRandomPositiveFloat = (num1, num2, digits = 1) => {
   return +result.toFixed(digits);
 };
 
-const similarAdds = Array.from({length: SIMILAR_ADDS_COUNT}, getSimilarAdd);
-similarAdds.sort();
-
-const getSimilarAdd = () => ({
-  author: getAuthor(),
-  offer: getOffer(),
-  location: getLocation()
-});
-
-const getAuthor = () => ({avatar: `img/avatars/user${getUserId()}.png`});
-
 const getUserId = () => {
   let userId = getRandomPositiveInteger(1, 10);
   userId = userId < 10 ?
@@ -42,6 +31,8 @@ const getUserId = () => {
     userIds.push(userId) && userId :
     getUserId();
 };
+
+const getAuthor = () => ({avatar: `img/avatars/user${getUserId()}.png`});
 
 const getPrice = () => getRandomPositiveInteger(100, 1000);
 
@@ -60,6 +51,17 @@ const getFeatures = () => features.slice(getRandomPositiveInteger(0, features.le
 
 const getPhotos = () => photos.slice(getRandomPositiveInteger(0, photos.length - 1));
 
+const getLatitude = () => getRandomPositiveFloat(35.65, 35.7, 5);
+
+const getLongitude = () => getRandomPositiveFloat(139.7, 139.8, 5);
+
+const getLocation = () => ({
+  lat: getLatitude(),
+  lng: getLongitude()
+});
+
+const getAddress = () => `${getLatitude()}, ${getLongitude()}`;
+
 const getOffer = () => ({
   title: 'title',
   address: getAddress(),
@@ -74,13 +76,11 @@ const getOffer = () => ({
   photos: getPhotos()
 });
 
-const getLocation = () => ({
-  lat: getLatitude(),
-  lng: getLongitude()
+const getSimilarAdd = () => ({
+  author: getAuthor(),
+  offer: getOffer(),
+  location: getLocation()
 });
 
-const getLatitude = () => getRandomPositiveFloat(35.65, 35.7, 5);
-
-const getLongitude = () => getRandomPositiveFloat(139.7, 139.8, 5);
-
-const getAddress = () => `${getLatitude()}, ${getLongitude()}`;
+const similarAdds = Array.from({length: SIMILAR_ADDS_COUNT}, getSimilarAdd);
+similarAdds.sort();
