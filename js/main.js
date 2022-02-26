@@ -37,15 +37,15 @@ const getArrayRandomNumberElements = (arr) => {
   return shuffledArray.slice(0, getRandomPositiveInteger(0, arr.length - 1));
 };
 
-const getAuthor = () => ({avatar: `img/avatars/user${getArrayRandomUniqueElement(userIds)}.png`});
+const getAuthor = (userId) => ({avatar: `img/avatars/user${userId}.png`});
 
 const getLocation = () => ({
   lat: getRandomPositiveFloat(35.65, 35.7, 5),
   lng: getRandomPositiveFloat(139.7, 139.8, 5)
 });
 
-const getOffer = () => ({
-  title: 'title',
+const getOffer = (userId) => ({
+  title: `title${userId}`,
   address: '',
   price: getRandomPositiveInteger(100, 1000),
   type: getArrayRandomElement(realtyTypes),
@@ -54,14 +54,15 @@ const getOffer = () => ({
   checkin: getArrayRandomElement(hours),
   checkout: getArrayRandomElement(hours),
   features: getArrayRandomNumberElements(features),
-  description: 'description',
+  description: `description${userId}`,
   photos: getArrayRandomNumberElements(photos)
 });
 
 const generateMockData = () => {
+  const userId = getArrayRandomUniqueElement(userIds);
   const add = {
-    author: getAuthor(),
-    offer: getOffer(),
+    author: getAuthor(userId),
+    offer: getOffer(userId),
     location: getLocation()
   };
   add.offer.address = `${add.location.lat}, ${add.location.lng}`;
