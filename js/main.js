@@ -1,6 +1,6 @@
 const SIMILAR_ADDS_COUNT = 10;
 const userIds = [];
-const addTypes = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
+const realtyTypes = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
 const features = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator'];
 const photos = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
@@ -36,7 +36,7 @@ const getAuthor = () => ({avatar: `img/avatars/user${getUserId()}.png`});
 
 const getPrice = () => getRandomPositiveInteger(100, 1000);
 
-const getAddType = () => addTypes[getRandomPositiveInteger(0, addTypes.length - 1)];
+const getRealtyTypes = () => realtyTypes[getRandomPositiveInteger(0, realtyTypes.length - 1)];
 
 const getRooms = () => getRandomPositiveInteger(1, 10);
 
@@ -64,7 +64,7 @@ const getOffer = () => ({
   title: 'title',
   address: '',
   price: getPrice(),
-  type: getAddType(),
+  type: getRealtyTypes(),
   rooms: getRooms(),
   guests: getGuests(),
   checkin: getRandomTime(),
