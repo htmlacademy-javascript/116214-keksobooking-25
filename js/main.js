@@ -8,10 +8,10 @@ const photos = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
 ];
 
-function getRandomPositiveInteger(a, b) {
-  const lower = Math.ceil(Math.min(Math.abs(a), Math.abs(b)));
-  const upper = Math.floor(Math.max(Math.abs(a), Math.abs(b)));
-  const result = Math.random() * (upper - lower + 1) + lower;
+function getRandomPositiveInteger(num1, num2) {
+  const min = Math.ceil(Math.min(Math.abs(num1), Math.abs(num2)));
+  const max = Math.floor(Math.max(Math.abs(num1), Math.abs(num2)));
+  const result = Math.random() * (max - min + 1) + min;
   return  Math.floor(result);
 }
 
