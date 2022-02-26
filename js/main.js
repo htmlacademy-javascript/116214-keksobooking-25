@@ -15,16 +15,12 @@ function getRandomPositiveInteger(num1, num2) {
   return  Math.floor(result);
 }
 
-getRandomPositiveInteger(5, 10);
-
 function getRandomPositiveFloat(num1, num2, digits = 1) {
   const min = Math.min(Math.abs(num1), Math.abs(num2));
   const max = Math.max(Math.abs(num1), Math.abs(num2));
   const result = Math.random() * (max - min) + min;
   return +result.toFixed(digits);
 }
-
-getRandomPositiveFloat(5.3, 5.4, 5);
 
 const similarAdds = Array.from({length: SIMILAR_ADDS_COUNT}, getSimilarAdd);
 similarAdds.sort();
