@@ -60,11 +60,9 @@ const getLocation = () => ({
   lng: getLongitude()
 });
 
-const getAddress = () => `${getLatitude()}, ${getLongitude()}`;
-
 const getOffer = () => ({
   title: 'title',
-  address: getAddress(),
+  address: '',
   price: getPrice(),
   type: getAddType(),
   rooms: getRooms(),
@@ -76,11 +74,16 @@ const getOffer = () => ({
   photos: getPhotos()
 });
 
-const getSimilarAdd = () => ({
-  author: getAuthor(),
-  offer: getOffer(),
-  location: getLocation()
-});
+const getSimilarAdd = () => {
+  const add = {
+    author: getAuthor(),
+    offer: getOffer(),
+    location: getLocation()
+  };
+  add.offer.address = `${add.location.lat}, ${add.location.lng}`;
+  return add;
+};
 
 const similarAdds = Array.from({length: SIMILAR_ADDS_COUNT}, getSimilarAdd);
+console.log(similarAdds);
 similarAdds.sort();
