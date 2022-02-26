@@ -44,7 +44,7 @@ const getGuests = () => getRandomPositiveInteger(1, 20);
 
 const getRandomTime = () => {
   const hour = getRandomPositiveInteger(12, 14);
-  return hour.toString().concat(':00');
+  return `${hour}:00`;
 };
 
 const getFeatures = () => features.slice(getRandomPositiveInteger(0, features.length - 1));
