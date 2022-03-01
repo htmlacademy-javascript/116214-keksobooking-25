@@ -3,7 +3,7 @@ import {
   getRandomPositiveFloat,
   getArrayRandomElement,
   getArrayRandomNumberElements
-} from './util';
+} from './util.js';
 
 const SIMILAR_ADDS_COUNT = 10;
 const hours = ['12:00', '13:00', '14:00'];
