@@ -1,3 +1,4 @@
-import {similarAdds} from './data.js';
+import {generateAdds} from './data.js';
 
-console.log(similarAdds);
+const adds = generateAdds();
+adds.sort();

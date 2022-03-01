@@ -15,7 +15,7 @@ const photos = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
 ];
 
-const similarAdds = Array.from({length: SIMILAR_ADDS_COUNT}, (value, index) => {
+const generateAdds = () => Array.from({length: SIMILAR_ADDS_COUNT}, (value, index) => {
   const userId = `0${index + 1}`.slice(-2);
   const lat = getRandomPositiveFloat(35.65, 35.7, 5);
   const lng = getRandomPositiveFloat(139.7, 139.8, 5);
@@ -39,4 +39,4 @@ const similarAdds = Array.from({length: SIMILAR_ADDS_COUNT}, (value, index) => {
   };
 });
 
-export {similarAdds};
+export {generateAdds};
