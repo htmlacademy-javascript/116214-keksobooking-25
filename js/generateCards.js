@@ -11,50 +11,47 @@ const RealtyTypesDictionary = {
   hotel: 'Отель'
 };
 
+const populateElement = (element, content, mode) => {
+  if (! content.length) {
+    element.classList.add('hidden');
+    return;
+  }
+
+  if (mode === 'text') {
+    element.textContent = content;
+  }
+
+  if (mode === 'html') {
+    element.innerHTML = content;
+  }
+};
+
 const cards = announcements.map(({author, offer}) => {
   const card = cardTemplate.cloneNode(true);
 
   const title = card.querySelector('.popup__title');
-  if (offer.title) {
-    title.textContent = offer.title;
-  } else {
-    title.classList.add('hidden');
-  }
+  populateElement(title, offer.title, 'text');
 
   const address = card.querySelector('.popup__text--address');
-  if (offer.address) {
-    address.textContent = offer.address;
-  } else {
-    address.classList.add('hidden');
-  }
+  populateElement(address, offer.address, 'text');
 
   const price = card.querySelector('.popup__text--price');
-  if (offer.price) {
-    price.innerHTML = `${offer.price} <span>₽/ночь</span>`;
-  } else {
-    price.classList.add('.hidden');
-  }
+  const priceContent = `${offer.price} <span>₽/ночь</span>`;
+  populateElement(price, priceContent, 'html');
 
   const realtyTypes = card.querySelector('.popup__type');
-  if (offer.type) {
-    realtyTypes.textContent = `${RealtyTypesDictionary[offer.type]}`;
-  } else {
-    realtyTypes.classList.add('hidden');
-  }
+  const realtyTypesContent = `${RealtyTypesDictionary[offer.type]}`;
+  populateElement(realtyTypes, realtyTypesContent, 'text');
 
   const capacity = card.querySelector('.popup__text--capacity');
-  if (offer.rooms && offer.guests) {
-    capacity.textContent = `${offer.rooms} комнаты для ${offer.guests} гостей`;
-  } else {
-    capacity.classList.add('hidden');
-  }
+  const capacityContent = `${offer.rooms} комнаты для ${offer.guests} гостей`;
+  populateElement(capacity, capacityContent, 'text');
 
   const time = card.querySelector('.popup__text--time');
-  if(offer.checkin && offer.checkout) {
-    time.textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
-  } else {
-    time.classList.add('hidden');
-  }
+  const timeContent = offer.checkin && offer.checkout ?
+    `Заезд после ${offer.checkin}, выезд до ${offer.checkout}` :
+    '';
+  populateElement(time, timeContent, 'text');
 
   const featureContainer = card.querySelector('.popup__features');
   const featureList = featureContainer.querySelectorAll('.popup__feature');
@@ -72,11 +69,7 @@ const cards = announcements.map(({author, offer}) => {
   }
 
   const description = card.querySelector('.popup__description');
-  if (offer.description) {
-    description.textContent = offer.description;
-  } else {
-    description.classList.add('hidden');
-  }
+  populateElement(description, offer.description, 'text');
 
   const photosList = card.querySelector('.popup__photos');
   const photoTemplate = photosList.querySelector('.popup__photo');
