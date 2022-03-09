@@ -19,9 +19,21 @@ const getArrayRandomNumberElements = (arr) => {
   return shuffledArray.slice(0, getRandomPositiveInteger(0, arr.length - 1));
 };
 
+const generateId = (max) => {
+  let current = 0;
+  return () => {
+    current = current + 1;
+    if (current <= max) {
+      return `0${current}`.slice(-2);
+    }
+    return NaN;
+  };
+};
+
 export {
   getRandomPositiveInteger,
   getRandomPositiveFloat,
   getArrayRandomElement,
-  getArrayRandomNumberElements
+  getArrayRandomNumberElements,
+  generateId
 };

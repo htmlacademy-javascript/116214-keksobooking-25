@@ -2,7 +2,8 @@ import {
   getRandomPositiveInteger,
   getRandomPositiveFloat,
   getArrayRandomElement,
-  getArrayRandomNumberElements
+  getArrayRandomNumberElements,
+  generateId
 } from './util.js';
 
 const SIMILAR_ADDS_COUNT = 10;
@@ -15,8 +16,10 @@ const photos = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
 ];
 
-const generateAdds = () => Array.from({length: SIMILAR_ADDS_COUNT}, (value, index) => {
-  const userId = `0${index + 1}`.slice(-2);
+const generateUserId = generateId(SIMILAR_ADDS_COUNT);
+
+const generateAdds = () => Array.from({length: SIMILAR_ADDS_COUNT}, () => {
+  const userId = generateUserId();
   const lat = getRandomPositiveFloat(35.65, 35.7, 5);
   const lng = getRandomPositiveFloat(139.7, 139.8, 5);
 
