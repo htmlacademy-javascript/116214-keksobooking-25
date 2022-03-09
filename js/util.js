@@ -19,9 +19,73 @@ const getArrayRandomNumberElements = (arr) => {
   return shuffledArray.slice(0, getRandomPositiveInteger(0, arr.length - 1));
 };
 
+const generateId = (max) => {
+  let current = 0;
+  return () => {
+    current = current + 1;
+    if (current <= max) {
+      return `0${current}`.slice(-2);
+    }
+    return NaN;
+  };
+};
+
+const populateElement = (element, content, mode) => {
+  if (! content) {
+    element.classList.add('hidden');
+    return;
+  }
+
+  if (mode === 'text') {
+    element.textContent = content;
+  }
+
+  if (mode === 'html') {
+    element.innerHTML = content;
+  }
+
+  if (mode === 'node') {
+    element.replaceChildren(content);
+  }
+};
+
+const conformLIstToData = (list, data, classPrefix = '') => {
+  list.forEach((item) => {
+    const isRequired = data.some((value) => item.classList.contains(`${classPrefix}${value}`));
+    if (! isRequired) {
+      item.remove();
+    }
+  });
+};
+
+const generateItemsByTemplate = (template, data, dataName) => {
+  if (! data.length) {
+    return null;
+  }
+
+  const container = document.createDocumentFragment();
+  data.forEach((value) => {
+    const item = template.cloneNode(true);
+    item[dataName] = value;
+    container.appendChild(item);
+  });
+  return container;
+};
+
+const formatPrice = (price) => price ? `${price} <span>₽/ночь</span>` : null;
+const formatCapacity = (rooms, guests) => rooms && guests ? `${rooms} комнаты для ${guests} гостей` : null;
+const formatTime = (checkin, checkout) => checkin && checkout ? `Заезд после ${checkin}, выезд до ${checkout}` : null;
+
 export {
   getRandomPositiveInteger,
   getRandomPositiveFloat,
   getArrayRandomElement,
-  getArrayRandomNumberElements
+  getArrayRandomNumberElements,
+  generateId,
+  populateElement,
+  formatPrice,
+  formatCapacity,
+  formatTime,
+  conformLIstToData,
+  generateItemsByTemplate
 };
