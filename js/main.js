@@ -1,4 +1,4 @@
-import {generateAdds} from './data.js';
+import {generateMockData} from './data.js';
 
-const adds = generateAdds();
+const adds = generateMockData();
 adds.sort();

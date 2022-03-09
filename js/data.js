@@ -18,7 +18,7 @@ const photos = [
 
 const generateUserId = generateId(SIMILAR_ADDS_COUNT);
 
-const generateAdds = () => Array.from({length: SIMILAR_ADDS_COUNT}, () => {
+const generateMockData = () => Array.from({length: SIMILAR_ADDS_COUNT}, () => {
   const userId = generateUserId();
   const lat = getRandomPositiveFloat(35.65, 35.7, 5);
   const lng = getRandomPositiveFloat(139.7, 139.8, 5);
@@ -42,4 +42,4 @@ const generateAdds = () => Array.from({length: SIMILAR_ADDS_COUNT}, () => {
   };
 });
 
-export {generateAdds};
+export {generateMockData};
