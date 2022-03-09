@@ -1,5 +1,5 @@
 import {generateMockData} from './data.js';
-import { populateElement } from './util.js';
+import { populateElement, formatPrice, formatCapacity, formatTime } from './util.js';
 
 const announcements = generateMockData();
 const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
@@ -23,21 +23,16 @@ const cards = announcements.map(({author, offer}) => {
   populateElement(addressItem, address, 'text');
 
   const priceItem = card.querySelector('.popup__text--price');
-  const priceContent = `${price} <span>₽/ночь</span>`;
-  populateElement(priceItem, priceContent, 'html');
+  populateElement(priceItem, formatPrice(price), 'html');
 
   const realtyTypeItem = card.querySelector('.popup__type');
   populateElement(realtyTypeItem, RealtyTypesDictionary[type], 'text');
 
   const capacityItem = card.querySelector('.popup__text--capacity');
-  const capacityContent = `${rooms} комнаты для ${guests} гостей`;
-  populateElement(capacityItem, capacityContent, 'text');
+  populateElement(capacityItem, formatCapacity(rooms, guests), 'text');
 
   const timeItem = card.querySelector('.popup__text--time');
-  const timeContent = checkin && checkout ?
-    `Заезд после ${checkin}, выезд до ${checkout}` :
-    '';
-  populateElement(timeItem, timeContent, 'text');
+  populateElement(timeItem, formatTime(checkin, checkout), 'text');
 
   const featureContainer = card.querySelector('.popup__features');
   const featureList = featureContainer.querySelectorAll('.popup__feature');

@@ -45,11 +45,18 @@ const populateElement = (element, content, mode) => {
   }
 };
 
+const formatPrice = (price) => `${price} <span>₽/ночь</span>`;
+const formatCapacity = (rooms, guests) => `${rooms} комнаты для ${guests} гостей`;
+const formatTime = (checkin, checkout) => checkin && checkout ? `Заезд после ${checkin}, выезд до ${checkout}` : '';
+
 export {
   getRandomPositiveInteger,
   getRandomPositiveFloat,
   getArrayRandomElement,
   getArrayRandomNumberElements,
   generateId,
-  populateElement
+  populateElement,
+  formatPrice,
+  formatCapacity,
+  formatTime
 };
