@@ -30,10 +30,26 @@ const generateId = (max) => {
   };
 };
 
+const populateElement = (element, content, mode) => {
+  if (! content.length) {
+    element.classList.add('hidden');
+    return;
+  }
+
+  if (mode === 'text') {
+    element.textContent = content;
+  }
+
+  if (mode === 'html') {
+    element.innerHTML = content;
+  }
+};
+
 export {
   getRandomPositiveInteger,
   getRandomPositiveFloat,
   getArrayRandomElement,
   getArrayRandomNumberElements,
-  generateId
+  generateId,
+  populateElement
 };

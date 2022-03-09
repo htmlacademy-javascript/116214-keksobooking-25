@@ -1,4 +1,5 @@
 import {generateMockData} from './data.js';
+import { populateElement } from './util.js';
 
 const announcements = generateMockData();
 const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
@@ -9,21 +10,6 @@ const RealtyTypesDictionary = {
   house: 'Дом',
   palace: 'Дворец',
   hotel: 'Отель'
-};
-
-const populateElement = (element, content, mode) => {
-  if (! content.length) {
-    element.classList.add('hidden');
-    return;
-  }
-
-  if (mode === 'text') {
-    element.textContent = content;
-  }
-
-  if (mode === 'html') {
-    element.innerHTML = content;
-  }
 };
 
 const cards = announcements.map(({author, offer}) => {
