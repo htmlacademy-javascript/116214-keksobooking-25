@@ -1,5 +1,5 @@
 import {generateMockData} from './data.js';
-import { populateElement, formatPrice, formatCapacity, formatTime } from './util.js';
+import { populateElement, formatPrice, formatCapacity, formatTime, conformLIstToData } from './util.js';
 
 const announcements = generateMockData();
 const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
@@ -36,14 +36,8 @@ const cards = announcements.map(({author, offer}) => {
 
   const featureContainer = card.querySelector('.popup__features');
   const featureList = featureContainer.querySelectorAll('.popup__feature');
-
   if (features.length) {
-    featureList.forEach((featureListItem) => {
-      const isRequired = features.some((feature) => featureListItem.classList.contains(`popup__feature--${feature}`));
-      if (! isRequired) {
-        featureListItem.remove();
-      }
-    });
+    conformLIstToData(featureList, features, 'popup__feature--');
   } else {
     featureContainer.classList.add('hidden');
   }

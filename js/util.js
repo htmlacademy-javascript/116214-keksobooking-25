@@ -45,6 +45,15 @@ const populateElement = (element, content, mode) => {
   }
 };
 
+const conformLIstToData = (list, data, classPrefix = '') => {
+  list.forEach((item) => {
+    const isRequired = data.some((value) => item.classList.contains(`${classPrefix}${value}`));
+    if (! isRequired) {
+      item.remove();
+    }
+  });
+};
+
 const formatPrice = (price) => `${price} <span>₽/ночь</span>`;
 const formatCapacity = (rooms, guests) => `${rooms} комнаты для ${guests} гостей`;
 const formatTime = (checkin, checkout) => checkin && checkout ? `Заезд после ${checkin}, выезд до ${checkout}` : '';
@@ -58,5 +67,6 @@ export {
   populateElement,
   formatPrice,
   formatCapacity,
-  formatTime
+  formatTime,
+  conformLIstToData
 };
