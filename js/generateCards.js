@@ -1,5 +1,12 @@
 import {generateMockData} from './data.js';
-import { populateElement, formatPrice, formatCapacity, formatTime, conformLIstToData } from './util.js';
+import {
+  populateElement,
+  formatPrice,
+  formatCapacity,
+  formatTime,
+  conformLIstToData,
+  generateItemsByTemplate
+} from './util.js';
 
 const announcements = generateMockData();
 const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
@@ -45,25 +52,16 @@ const cards = announcements.map(({author, offer}) => {
   const descriptionItem = card.querySelector('.popup__description');
   populateElement(descriptionItem, description, 'text');
 
-  const photosList = card.querySelector('.popup__photos');
-  const photoTemplate = photosList.querySelector('.popup__photo');
-
-  if (photos) {
-    const photosContainer = document.createDocumentFragment();
-    photos.forEach((photo) => {
-      const photoItem = photoTemplate.cloneNode(true);
-      photoItem.src = photo;
-      photosContainer.appendChild(photoItem);
-    });
-    photosList.innerHTML = '';
-    photosList.appendChild(photosContainer);
-  } else {
-    photosList.classList.add('hidden');
-  }
+  const photoItemsContainer = card.querySelector('.popup__photos');
+  const photoTemplate = photoItemsContainer.querySelector('.popup__photo');
+  const photoItemsList= generateItemsByTemplate(photoTemplate, photos, 'src');
+  populateElement(photoItemsContainer, photoItemsList, 'node');
 
   const avatarItem = card.querySelector('.popup__avatar');
   if (author.avatar) {
     avatarItem.src = author.avatar;
+  } else {
+    avatarItem.classList.add('hidden');
   }
 
   return card;

@@ -31,7 +31,7 @@ const generateId = (max) => {
 };
 
 const populateElement = (element, content, mode) => {
-  if (! content.length) {
+  if (! content) {
     element.classList.add('hidden');
     return;
   }
@@ -42,6 +42,10 @@ const populateElement = (element, content, mode) => {
 
   if (mode === 'html') {
     element.innerHTML = content;
+  }
+
+  if (mode === 'node') {
+    element.replaceChildren(content);
   }
 };
 
@@ -54,9 +58,23 @@ const conformLIstToData = (list, data, classPrefix = '') => {
   });
 };
 
-const formatPrice = (price) => `${price} <span>₽/ночь</span>`;
-const formatCapacity = (rooms, guests) => `${rooms} комнаты для ${guests} гостей`;
-const formatTime = (checkin, checkout) => checkin && checkout ? `Заезд после ${checkin}, выезд до ${checkout}` : '';
+const generateItemsByTemplate = (template, data, dataName) => {
+  if (! data.length) {
+    return null;
+  }
+
+  const container = document.createDocumentFragment();
+  data.forEach((value) => {
+    const item = template.cloneNode(true);
+    item[dataName] = value;
+    container.appendChild(item);
+  });
+  return container;
+};
+
+const formatPrice = (price) => price ? `${price} <span>₽/ночь</span>` : null;
+const formatCapacity = (rooms, guests) => rooms && guests ? `${rooms} комнаты для ${guests} гостей` : null;
+const formatTime = (checkin, checkout) => checkin && checkout ? `Заезд после ${checkin}, выезд до ${checkout}` : null;
 
 export {
   getRandomPositiveInteger,
@@ -68,5 +86,6 @@ export {
   formatPrice,
   formatCapacity,
   formatTime,
-  conformLIstToData
+  conformLIstToData,
+  generateItemsByTemplate
 };
