@@ -1,3 +1,7 @@
 import {generateMockData} from './data.js';
 
-const adds = generateMockData();
+const addsMockData = generateMockData();
+
+const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
+
+
