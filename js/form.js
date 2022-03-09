@@ -1,13 +1,8 @@
-import {deactivateForm, activateForm} from './util.js';
+import {activateForm} from './util.js';
 
-const deactivatePage = () => {
-  deactivateForm('ad-form');
-  deactivateForm('map__filters');
+const activatePage = (status) => {
+  activateForm('ad-form', status);
+  activateForm('map__filters', status);
 };
 
-const activatePage = () => {
-  activateForm('ad-form');
-  activateForm('map__filters');
-};
-
-export {activatePage, deactivatePage};
+export {activatePage};

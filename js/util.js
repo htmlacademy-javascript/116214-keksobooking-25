@@ -76,26 +76,20 @@ const formatPrice = (price) => price ? `${price} <span>₽/ночь</span>` : nu
 const formatCapacity = (rooms, guests) => rooms && guests ? `${rooms} комнаты для ${guests} гостей` : null;
 const formatTime = (checkin, checkout) => checkin && checkout ? `Заезд после ${checkin}, выезд до ${checkout}` : null;
 
-const deactivateForm = (className) => {
+const activateForm = (className, status) => {
   const form = document.querySelector(`.${className}`);
   Array.from(form.elements).forEach((item) => {
-    item.disabled = true;
+    item.disabled = status;
   });
   Array.from(form.querySelector('fieldset')).forEach((item) => {
-    item.disabled = true;
+    item.disabled = status;
   });
-  form.classList.add(`${className}--disabled`);
-};
 
-const activateForm = (className) => {
-  const form = document.querySelector(`.${className}`);
-  Array.from(form.elements).forEach((item) => {
-    item.disabled = false;
-  });
-  Array.from(form.querySelector('fieldset')).forEach((item) => {
-    item.disabled = false;
-  });
-  form.classList.remove(`${className}--disabled`);
+  if (status) {
+    form.classList.remove(`${className}--disabled`);
+  } else {
+    form.classList.add(`${className}--disabled`);
+  }
 };
 
 export {
@@ -110,6 +104,5 @@ export {
   formatTime,
   conformLIstToData,
   generateItemsByTemplate,
-  deactivateForm,
   activateForm
 };
