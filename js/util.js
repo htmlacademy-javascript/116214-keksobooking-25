@@ -91,6 +91,9 @@ const disableForm = (className, status) => {
   form.classList[status ? 'remove' : 'add'](`${className}--disabled`);
 };
 
+const activateForm = (className) => disableForm(className, true);
+const deactivateForm = (className) => disableForm(className, false);
+
 export {
   getRandomPositiveInteger,
   getRandomPositiveFloat,
@@ -103,5 +106,6 @@ export {
   formatTime,
   conformLIstToData,
   generateItemsByTemplate,
-  disableForm
+  activateForm,
+  deactivateForm
 };
