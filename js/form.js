@@ -1,8 +1,8 @@
-import {activateForm} from './util.js';
+import {disableForm} from './util.js';
 
-const activatePage = (status) => {
-  activateForm('ad-form', status);
-  activateForm('map__filters', status);
+const togglePageActivity = (status) => {
+  disableForm('ad-form', status);
+  disableForm('map__filters', status);
 };
 
-export {activatePage};
+export {togglePageActivity};

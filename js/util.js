@@ -76,7 +76,7 @@ const formatPrice = (price) => price ? `${price} <span>₽/ночь</span>` : nu
 const formatCapacity = (rooms, guests) => rooms && guests ? `${rooms} комнаты для ${guests} гостей` : null;
 const formatTime = (checkin, checkout) => checkin && checkout ? `Заезд после ${checkin}, выезд до ${checkout}` : null;
 
-const activateForm = (className, status) => {
+const disableForm = (className, status) => {
   const form = document.querySelector(`.${className}`);
 
   Array.from(form.elements).forEach((item) => {
@@ -101,5 +101,5 @@ export {
   formatTime,
   conformLIstToData,
   generateItemsByTemplate,
-  activateForm
+  disableForm
 };
