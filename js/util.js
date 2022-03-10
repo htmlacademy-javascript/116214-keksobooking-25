@@ -36,17 +36,19 @@ const populateElement = (element, content, mode) => {
     return;
   }
 
-  if (mode === 'text') {
-    element.textContent = content;
-  }
+  const addContent = {
+    text() {
+      element.textContent = content;
+    },
+    html() {
+      element.innerHTML = content;
+    },
+    node() {
+      element.replaceChildren(content);
+    }
+  };
 
-  if (mode === 'html') {
-    element.innerHTML = content;
-  }
-
-  if (mode === 'node') {
-    element.replaceChildren(content);
-  }
+  addContent[mode]();
 };
 
 const conformLIstToData = (list, data, classPrefix = '') => {
