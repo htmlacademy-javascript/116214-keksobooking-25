@@ -78,6 +78,7 @@ const formatTime = (checkin, checkout) => checkin && checkout ? `Заезд по
 
 const activateForm = (className, status) => {
   const form = document.querySelector(`.${className}`);
+
   Array.from(form.elements).forEach((item) => {
     item.disabled = status;
   });
@@ -85,11 +86,7 @@ const activateForm = (className, status) => {
     item.disabled = status;
   });
 
-  if (status) {
-    form.classList.remove(`${className}--disabled`);
-  } else {
-    form.classList.add(`${className}--disabled`);
-  }
+  form.classList[status ? 'remove' : 'add'](`${className}--disabled`);
 };
 
 export {
