@@ -30,23 +30,25 @@ const generateId = (max) => {
   };
 };
 
+const addContent = {
+  text(element, content) {
+    element.textContent = content;
+  },
+  html(element, content) {
+    element.innerHTML = content;
+  },
+  node(element, content) {
+    element.replaceChildren(content);
+  }
+};
+
 const populateElement = (element, content, mode) => {
   if (! content) {
     element.classList.add('hidden');
     return;
   }
 
-  if (mode === 'text') {
-    element.textContent = content;
-  }
-
-  if (mode === 'html') {
-    element.innerHTML = content;
-  }
-
-  if (mode === 'node') {
-    element.replaceChildren(content);
-  }
+  addContent[mode](element, content);
 };
 
 const conformLIstToData = (list, data, classPrefix = '') => {
@@ -76,21 +78,21 @@ const formatPrice = (price) => price ? `${price} <span>₽/ночь</span>` : nu
 const formatCapacity = (rooms, guests) => rooms && guests ? `${rooms} комнаты для ${guests} гостей` : null;
 const formatTime = (checkin, checkout) => checkin && checkout ? `Заезд после ${checkin}, выезд до ${checkout}` : null;
 
-const activateForm = (className, status) => {
+const disableForm = (className, status) => {
   const form = document.querySelector(`.${className}`);
+
   Array.from(form.elements).forEach((item) => {
-    item.disabled = status;
+    item.disabled = !status;
   });
   Array.from(form.querySelector('fieldset')).forEach((item) => {
-    item.disabled = status;
+    item.disabled = !status;
   });
 
-  if (status) {
-    form.classList.remove(`${className}--disabled`);
-  } else {
-    form.classList.add(`${className}--disabled`);
-  }
+  form.classList[status ? 'remove' : 'add'](`${className}--disabled`);
 };
+
+const activateForm = (className) => disableForm(className, true);
+const deactivateForm = (className) => disableForm(className, false);
 
 export {
   getRandomPositiveInteger,
@@ -104,5 +106,6 @@ export {
   formatTime,
   conformLIstToData,
   generateItemsByTemplate,
-  activateForm
+  activateForm,
+  deactivateForm
 };
