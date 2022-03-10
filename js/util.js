@@ -30,25 +30,25 @@ const generateId = (max) => {
   };
 };
 
+const addContent = {
+  text(element, content) {
+    element.textContent = content;
+  },
+  html(element, content) {
+    element.innerHTML = content;
+  },
+  node(element, content) {
+    element.replaceChildren(content);
+  }
+};
+
 const populateElement = (element, content, mode) => {
   if (! content) {
     element.classList.add('hidden');
     return;
   }
 
-  const addContent = {
-    text() {
-      element.textContent = content;
-    },
-    html() {
-      element.innerHTML = content;
-    },
-    node() {
-      element.replaceChildren(content);
-    }
-  };
-
-  addContent[mode]();
+  addContent[mode](element, content);
 };
 
 const conformLIstToData = (list, data, classPrefix = '') => {
