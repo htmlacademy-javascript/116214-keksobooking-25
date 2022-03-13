@@ -1,13 +1,17 @@
-import {activateForm, deactivateForm} from './util.js';
+const disableForm = (className, status) => {
+  const form = document.querySelector(`.${className}`);
 
-const activatePage = () => {
-  activateForm('ad-form');
-  activateForm('map__filters');
+  Array.from(form.elements).forEach((item) => {
+    item.disabled = !status;
+  });
+  Array.from(form.querySelector('fieldset')).forEach((item) => {
+    item.disabled = !status;
+  });
+
+  form.classList[status ? 'remove' : 'add'](`${className}--disabled`);
 };
 
-const deactivatePage = () => {
-  deactivateForm('ad-form');
-  deactivateForm('map__filters');
-};
+const activateForm = (className) => disableForm(className, true);
+const deactivateForm = (className) => disableForm(className, false);
 
-export {activatePage, deactivatePage};
+export {activateForm, deactivateForm};

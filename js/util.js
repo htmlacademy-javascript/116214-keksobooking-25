@@ -78,22 +78,6 @@ const formatPrice = (price) => price ? `${price} <span>₽/ночь</span>` : nu
 const formatCapacity = (rooms, guests) => rooms && guests ? `${rooms} комнаты для ${guests} гостей` : null;
 const formatTime = (checkin, checkout) => checkin && checkout ? `Заезд после ${checkin}, выезд до ${checkout}` : null;
 
-const disableForm = (className, status) => {
-  const form = document.querySelector(`.${className}`);
-
-  Array.from(form.elements).forEach((item) => {
-    item.disabled = !status;
-  });
-  Array.from(form.querySelector('fieldset')).forEach((item) => {
-    item.disabled = !status;
-  });
-
-  form.classList[status ? 'remove' : 'add'](`${className}--disabled`);
-};
-
-const activateForm = (className) => disableForm(className, true);
-const deactivateForm = (className) => disableForm(className, false);
-
 export {
   getRandomPositiveInteger,
   getRandomPositiveFloat,
@@ -105,7 +89,5 @@ export {
   formatCapacity,
   formatTime,
   conformLIstToData,
-  generateItemsByTemplate,
-  activateForm,
-  deactivateForm
+  generateItemsByTemplate
 };
