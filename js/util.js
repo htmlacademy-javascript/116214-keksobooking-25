@@ -60,18 +60,18 @@ const conformLIstToData = (list, data, classPrefix = '') => {
   });
 };
 
-const generateItemsByTemplate = (template, data, dataName) => {
+const generatListItemsByTemplate = (template, data, dataName) => {
   if (! data.length) {
     return null;
   }
 
-  const container = document.createDocumentFragment();
+  const fragment = document.createDocumentFragment();
   data.forEach((value) => {
     const item = template.cloneNode(true);
     item[dataName] = value;
-    container.appendChild(item);
+    fragment.appendChild(item);
   });
-  return container;
+  return fragment;
 };
 
 const formatPrice = (price) => price ? `${price} <span>₽/ночь</span>` : null;
@@ -89,5 +89,5 @@ export {
   formatCapacity,
   formatTime,
   conformLIstToData,
-  generateItemsByTemplate
+  generatListItemsByTemplate
 };

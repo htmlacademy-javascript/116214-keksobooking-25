@@ -5,7 +5,7 @@ import {
   formatCapacity,
   formatTime,
   conformLIstToData,
-  generateItemsByTemplate
+  generatListItemsByTemplate
 } from './util.js';
 
 const announcements = generateMockData();
@@ -54,7 +54,7 @@ const cards = announcements.map(({author, offer}) => {
 
   const photoItemsContainer = card.querySelector('.popup__photos');
   const photoTemplate = photoItemsContainer.querySelector('.popup__photo');
-  const photoItemsList= generateItemsByTemplate(photoTemplate, photos, 'src');
+  const photoItemsList= generatListItemsByTemplate(photoTemplate, photos, 'src');
   populateElement(photoItemsContainer, photoItemsList, 'node');
 
   const avatarItem = card.querySelector('.popup__avatar');
