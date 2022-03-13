@@ -1,3 +1,5 @@
+const formClassNames = ['ad-form', 'map__filters'];
+
 const disableForm = (className, status) => {
   const form = document.querySelector(`.${className}`);
 
@@ -14,4 +16,4 @@ const disableForm = (className, status) => {
 const activateForm = (className) => disableForm(className, true);
 const deactivateForm = (className) => disableForm(className, false);
 
-export {activateForm, deactivateForm};
+export {formClassNames, activateForm, deactivateForm};

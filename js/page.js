@@ -1,13 +1,11 @@
-import {activateForm, deactivateForm} from './util.js';
+import {formClassNames, activateForm, deactivateForm} from './form.js';
 
 const activatePage = () => {
-  activateForm('ad-form');
-  activateForm('map__filters');
+  formClassNames.forEach((className) => activateForm(className));
 };
 
 const deactivatePage = () => {
-  deactivateForm('ad-form');
-  deactivateForm('map__filters');
+  formClassNames.forEach((className) => deactivateForm(className));
 };
 
 export {activatePage, deactivatePage};
