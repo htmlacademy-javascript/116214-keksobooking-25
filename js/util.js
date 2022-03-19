@@ -60,39 +60,23 @@ const conformLIstToData = (list, data, classPrefix = '') => {
   });
 };
 
-const generateItemsByTemplate = (template, data, dataName) => {
+const generatListItemsByTemplate = (template, data, dataName) => {
   if (! data.length) {
     return null;
   }
 
-  const container = document.createDocumentFragment();
+  const fragment = document.createDocumentFragment();
   data.forEach((value) => {
     const item = template.cloneNode(true);
     item[dataName] = value;
-    container.appendChild(item);
+    fragment.appendChild(item);
   });
-  return container;
+  return fragment;
 };
 
 const formatPrice = (price) => price ? `${price} <span>₽/ночь</span>` : null;
 const formatCapacity = (rooms, guests) => rooms && guests ? `${rooms} комнаты для ${guests} гостей` : null;
 const formatTime = (checkin, checkout) => checkin && checkout ? `Заезд после ${checkin}, выезд до ${checkout}` : null;
-
-const disableForm = (className, status) => {
-  const form = document.querySelector(`.${className}`);
-
-  Array.from(form.elements).forEach((item) => {
-    item.disabled = !status;
-  });
-  Array.from(form.querySelector('fieldset')).forEach((item) => {
-    item.disabled = !status;
-  });
-
-  form.classList[status ? 'remove' : 'add'](`${className}--disabled`);
-};
-
-const activateForm = (className) => disableForm(className, true);
-const deactivateForm = (className) => disableForm(className, false);
 
 export {
   getRandomPositiveInteger,
@@ -105,7 +89,5 @@ export {
   formatCapacity,
   formatTime,
   conformLIstToData,
-  generateItemsByTemplate,
-  activateForm,
-  deactivateForm
+  generatListItemsByTemplate
 };
