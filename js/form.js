@@ -69,7 +69,7 @@ const pristineConfig = {
 
 Pristine.addValidator(
   'title-range',
-  (value, minlength, maxlength) => parseInt(minlength, 10) <= value && value <= parseInt(maxlength, 10),
+  (value, minlength, maxlength) => parseInt(minlength, 10) <= value.length && value.length <= parseInt(maxlength, 10),
   // Here Pristine requires ordinary quotes for strin
   // eslint-disable-next-line
   'От ${1} до ${2} символов',
