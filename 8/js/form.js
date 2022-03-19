@@ -69,7 +69,9 @@ const pristineConfig = {
 
 Pristine.addValidator(
   'title-range',
-  (value, minlength, maxlength) => parseInt(minlength, 10) <= value && value <= parseInt(maxlength, 10),
+  (value, minlength, maxlength) => parseInt(minlength, 10) <= value.length && value.length <= parseInt(maxlength, 10),
+  // Here Pristine requires ordinary quotes for strin
+  // eslint-disable-next-line
   'От ${1} до ${2} символов',
   1,
   false
@@ -96,9 +98,9 @@ adForm.addEventListener('submit', (evt) => {
   const isValid = adFormPristine.validate();
 
   if (isValid) {
-    console.log('is valid');
+    // console.log('is valid');
   } else {
-    console.log('is not valid');
+    // console.log('is not valid');
   }
 });
 
