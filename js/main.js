@@ -1,5 +1,6 @@
 import {cards} from './generateCards.js';
 import { activatePage, deactivatePage } from './page.js';
+import './form.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   deactivatePage();

@@ -922,6 +922,12 @@ fieldset {
 /**
  * Сообщения об успешном и неуспешном создании объявления
  */
+.error-text {
+  display: inline-block;
+  margin-top: 3px;
+  font-size: 12px;
+  color: red;
+}
 
 .success,
 .error {
