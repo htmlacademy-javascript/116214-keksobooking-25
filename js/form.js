@@ -6,6 +6,8 @@ const type = adForm.querySelector('#type');
 const price = adForm.querySelector('#price');
 const roomNumber = adForm.querySelector('#room_number');
 const capacity = adForm.querySelector('#capacity');
+const timein = adForm.querySelector('#timein');
+const timeout = adForm.querySelector('#timeout');
 
 const minPricesPerNightByType = {
   bungalow: 0,
@@ -91,6 +93,14 @@ adFormPristine.addValidator(
 type.addEventListener('change', () => {
   setMinPricePerNight();
   adFormPristine = new Pristine(adForm, pristineConfig, true);
+});
+
+timein.addEventListener('change', () => {
+  timeout.value = timein.value;
+});
+
+timeout.addEventListener('change', () => {
+  timein.value = timeout.value;
 });
 
 adForm.addEventListener('submit', (evt) => {
