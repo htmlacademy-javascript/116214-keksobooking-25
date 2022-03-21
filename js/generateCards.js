@@ -67,5 +67,5 @@ const cards = announcements.map(({author, offer}) => {
   return card;
 });
 
-export { cards };
+export { cards, announcements };
 

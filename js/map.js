@@ -4,7 +4,7 @@ const mapCenterCoordinates = {
 };
 
 const map = L.map('map-canvas')
-  .setView(mapCenterCoordinates, 10);
+  .setView(mapCenterCoordinates, 13);
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -19,7 +19,13 @@ const mainPinIcon = L.icon({
   inconAnchor: [26, 52]
 });
 
-const marker = L.marker(
+const ordinaryPinIcon = L.icon({
+  iconUrl: './img/pin.svg',
+  iconSize: [40, 40],
+  inconAnchor: [20, 40]
+});
+
+const mainMarker = L.marker(
   mapCenterCoordinates,
   {
     icon: mainPinIcon,
@@ -27,6 +33,6 @@ const marker = L.marker(
   }
 );
 
-marker.addTo(map);
+mainMarker.addTo(map);
 
-export {map, mapCenterCoordinates, marker};
+export {map, mapCenterCoordinates, mainMarker, ordinaryPinIcon};
