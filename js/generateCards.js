@@ -19,7 +19,7 @@ const RealtyTypesDictionary = {
   hotel: 'Отель'
 };
 
-const cards = announcements.map(({author, offer}) => {
+const generateCard = (author, offer) => {
   const {title, address, price, type, rooms, guests, checkin, checkout, features, description, photos} = offer;
   const card = cardTemplate.cloneNode(true);
 
@@ -65,7 +65,9 @@ const cards = announcements.map(({author, offer}) => {
   }
 
   return card;
-});
+};
 
-export { cards };
+const cards = announcements.map(({author, offer}) => generateCard(author,offer));
+
+export { cards, announcements, generateCard };
 

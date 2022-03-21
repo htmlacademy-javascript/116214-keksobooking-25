@@ -1,13 +1,23 @@
-import {cards} from './generateCards.js';
+import './map.js';
+import {interactiveMap, mapCenterCoordinates, mainMarker, createOrdinaryMarker} from './map.js';
+import {announcements} from './generateCards.js';
 import { activatePage, deactivatePage } from './page.js';
 import './form.js';
+import {setAddress} from './form.js';
 
-document.addEventListener('DOMContentLoaded', () => {
-  deactivatePage();
+deactivatePage();
+
+interactiveMap.whenReady(() => {
+  activatePage();
+  setAddress(mapCenterCoordinates);
 });
 
-setTimeout(activatePage, 1000);
+mainMarker.on('moveend', (evt) => {
+  const markerCoordinates = evt.target.getLatLng();
+  setAddress(markerCoordinates);
+});
 
-const mapCanvas = document.querySelector('#map-canvas');
-mapCanvas.appendChild(cards[0]);
+announcements.forEach(({author, offer, location}) => {
+  createOrdinaryMarker(author, offer, location);
+});
 
