@@ -9,5 +9,4 @@ document.addEventListener('DOMContentLoaded', () => {
 setTimeout(activatePage, 1000);
 
 const mapCanvas = document.querySelector('#map-canvas');
-mapCanvas.appendChild(cards[0]);
 
