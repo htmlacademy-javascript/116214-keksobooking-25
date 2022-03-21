@@ -1,6 +1,6 @@
 import './map.js';
 import {map, mapCenterCoordinates, mainMarker, ordinaryPinIcon} from './map.js';
-import {cards, announcements} from './generateCards.js';
+import {announcements, generateCard} from './generateCards.js';
 import { activatePage, deactivatePage } from './page.js';
 import './form.js';
 import {setAddress} from './form.js';
@@ -17,19 +17,19 @@ mainMarker.on('moveend', (evt) => {
   setAddress(markerCoordinates);
 });
 
-const mapCanvas = document.querySelector('#map-canvas');
-
-announcements.forEach((announcement) => {
+announcements.forEach(({author, offer, location}) => {
   const marker = L.marker(
     {
-      lat: announcement.location.lat,
-      lng: announcement.location.lng
+      lat: location.lat,
+      lng: location.lng
     },
     {
       icon: ordinaryPinIcon
     }
   );
 
-  marker.addTo(map);
+  marker
+    .addTo(map)
+    .bindPopup(generateCard(author, offer));
 });
 
