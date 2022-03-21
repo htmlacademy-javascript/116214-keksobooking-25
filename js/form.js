@@ -8,6 +8,7 @@ const roomNumber = adForm.querySelector('#room_number');
 const capacity = adForm.querySelector('#capacity');
 const timein = adForm.querySelector('#timein');
 const timeout = adForm.querySelector('#timeout');
+const address = adForm.querySelector('#address');
 
 const minPricesPerNightByType = {
   bungalow: 0,
@@ -58,6 +59,10 @@ const disableForm = (className, status) => {
 
 const activateForm = (className) => disableForm(className, true);
 const deactivateForm = (className) => disableForm(className, false);
+
+const setAddress = (coordinates) => {
+  address.value = `${coordinates.lat.toFixed(5)},${coordinates.lng.toFixed(5)}`;
+};
 
 // Pristine
 const pristineConfig = {
@@ -115,4 +120,4 @@ adForm.addEventListener('submit', (evt) => {
 });
 
 
-export {formClassNames, activateForm, deactivateForm};
+export {formClassNames, activateForm, deactivateForm, setAddress};

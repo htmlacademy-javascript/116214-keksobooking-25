@@ -89,5 +89,5 @@ export {
   formatCapacity,
   formatTime,
   conformLIstToData,
-  generatListItemsByTemplate
+  generatListItemsByTemplate,
 };

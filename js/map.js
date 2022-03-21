@@ -1,10 +1,10 @@
-const mapCenter = {
-  lat: 35.693,
-  lng: 139.746
+const mapCenterCoordinates = {
+  lat: 35.67920498464551,
+  lng: 139.77100169861524
 };
 
 const map = L.map('map-canvas')
-  .setView(mapCenter, 10);
+  .setView(mapCenterCoordinates, 10);
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -20,12 +20,13 @@ const mainPinIcon = L.icon({
 });
 
 const marker = L.marker(
-  mapCenter,
+  mapCenterCoordinates,
   {
-    icon: mainPinIcon
+    icon: mainPinIcon,
+    draggable: true
   }
 );
 
 marker.addTo(map);
 
-export {map};
+export {map, mapCenterCoordinates, marker};
