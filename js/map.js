@@ -1,3 +1,5 @@
+import { generateCard } from './generateCards.js';
+
 const mapCenterCoordinates = {
   lat: 35.67920498464551,
   lng: 139.77100169861524
@@ -19,12 +21,6 @@ const mainPinIcon = L.icon({
   inconAnchor: [26, 52]
 });
 
-const ordinaryPinIcon = L.icon({
-  iconUrl: './img/pin.svg',
-  iconSize: [40, 40],
-  inconAnchor: [20, 40]
-});
-
 const mainMarker = L.marker(
   mapCenterCoordinates,
   {
@@ -35,4 +31,28 @@ const mainMarker = L.marker(
 
 mainMarker.addTo(map);
 
-export {map, mapCenterCoordinates, mainMarker, ordinaryPinIcon};
+const ordinaryPinIcon = L.icon({
+  iconUrl: './img/pin.svg',
+  iconSize: [40, 40],
+  inconAnchor: [20, 40]
+});
+
+const markerGroup = L.layerGroup().addTo(map);
+
+const createOrdinaryMarker = (author, offer, location) => {
+  const marker = L.marker(
+    {
+      lat: location.lat,
+      lng: location.lng
+    },
+    {
+      icon: ordinaryPinIcon
+    }
+  );
+
+  marker
+    .addTo(markerGroup)
+    .bindPopup(generateCard(author, offer));
+};
+
+export {map, mapCenterCoordinates, mainMarker, createOrdinaryMarker};
