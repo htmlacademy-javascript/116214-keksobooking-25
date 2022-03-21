@@ -1,3 +1,4 @@
+import './map.js';
 import {cards} from './generateCards.js';
 import { activatePage, deactivatePage } from './page.js';
 import './form.js';
