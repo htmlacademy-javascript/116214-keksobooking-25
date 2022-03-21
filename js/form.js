@@ -4,19 +4,15 @@ const formClassNames = ['ad-form', 'map__filters'];
 const adForm = document.querySelector('.ad-form');
 const type = adForm.querySelector('#type');
 const price = adForm.querySelector('#price');
+const priceSlider = adForm.querySelector('.ad-form__slider');
 const roomNumber = adForm.querySelector('#room_number');
 const capacity = adForm.querySelector('#capacity');
 const timein = adForm.querySelector('#timein');
 const timeout = adForm.querySelector('#timeout');
 const address = adForm.querySelector('#address');
 
-const minPricesPerNightByType = {
-  bungalow: 0,
-  flat: 1000,
-  hotel: 3000,
-  house: 5000,
-  palace: 10000
-};
+const defaultMinPrice = 1000;
+const defaultMaxPrice = 100000;
 
 const capacityPerRoomNumber = {
   '1': [1],
@@ -26,8 +22,19 @@ const capacityPerRoomNumber = {
 };
 
 // Utils
-const setMinPricePerNight = () => {
-  const minPrice = minPricesPerNightByType[type.value];
+const getMinPrice = (housingType) => {
+  const minPricesPerNightByType = {
+    bungalow: 0,
+    flat: 1000,
+    hotel: 3000,
+    house: 5000,
+    palace: 10000
+  };
+  return minPricesPerNightByType[housingType];
+};
+
+const setMinPricePerNight = (housingType) => {
+  const minPrice = getMinPrice(housingType);
   price.setAttribute('min', minPrice);
   price.setAttribute('data-pristine-min-message', `Минимальное значение ${minPrice}`);
   price.setAttribute('placeholder', minPrice);
@@ -56,12 +63,46 @@ const disableForm = (className, status) => {
   form.classList[status ? 'remove' : 'add'](`${className}--disabled`);
 };
 
+const getStartPrice = (minPrice, maxPrice) => (maxPrice - minPrice) / 2;
+
 // Interface
 const activateForm = (className) => disableForm(className, true);
 const deactivateForm = (className) => disableForm(className, false);
 
 const setAddress = (coordinates) => {
   address.value = `${coordinates.lat.toFixed(5)},${coordinates.lng.toFixed(5)}`;
+};
+
+// Nouislider
+noUiSlider.create(priceSlider, {
+  range: {
+    min: defaultMinPrice,
+    max: defaultMaxPrice
+  },
+  start: getStartPrice(defaultMinPrice, defaultMaxPrice),
+  step: 1000,
+  connect: 'lower',
+  format: {
+    to: function(value) {
+      return value.toFixed();
+    },
+    from: function(value) {
+      return parseInt(value, 10).toFixed();
+    }
+  }
+});
+
+priceSlider.noUiSlider.on('update', () => {
+  price.value = priceSlider.noUiSlider.get();
+});
+
+const updateSliderMinPrice = (minPrice) => {
+  priceSlider.noUiSlider.updateOptions({
+    range: {
+      min: minPrice,
+      max: defaultMaxPrice
+    },
+  });
 };
 
 // Pristine
@@ -95,9 +136,11 @@ adFormPristine.addValidator(
 );
 
 // Event listeners
-type.addEventListener('change', () => {
-  setMinPricePerNight();
+type.addEventListener('change', (evt) => {
+  const housingType = evt.target.value;
+  setMinPricePerNight(housingType);
   adFormPristine = new Pristine(adForm, pristineConfig, true);
+  updateSliderMinPrice(getMinPrice(housingType));
 });
 
 timein.addEventListener('change', () => {
