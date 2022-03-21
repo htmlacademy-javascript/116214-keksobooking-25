@@ -43,7 +43,6 @@ const getCapacityErrorMessage = () => {
   );
 };
 
-// Interface
 const disableForm = (className, status) => {
   const form = document.querySelector(`.${className}`);
 
@@ -57,6 +56,7 @@ const disableForm = (className, status) => {
   form.classList[status ? 'remove' : 'add'](`${className}--disabled`);
 };
 
+// Interface
 const activateForm = (className) => disableForm(className, true);
 const deactivateForm = (className) => disableForm(className, false);
 
