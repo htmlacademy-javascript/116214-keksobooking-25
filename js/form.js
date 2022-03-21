@@ -11,9 +11,6 @@ const timein = adForm.querySelector('#timein');
 const timeout = adForm.querySelector('#timeout');
 const address = adForm.querySelector('#address');
 
-const defaultMinPrice = 1000;
-const defaultMaxPrice = 100000;
-
 const capacityPerRoomNumber = {
   '1': [1],
   '2': [1, 2],
@@ -63,8 +60,6 @@ const disableForm = (className, status) => {
   form.classList[status ? 'remove' : 'add'](`${className}--disabled`);
 };
 
-const getStartPrice = (minPrice, maxPrice) => (maxPrice - minPrice) / 2;
-
 // Interface
 const activateForm = (className) => disableForm(className, true);
 const deactivateForm = (className) => disableForm(className, false);
@@ -76,10 +71,10 @@ const setAddress = (coordinates) => {
 // Nouislider
 noUiSlider.create(priceSlider, {
   range: {
-    min: defaultMinPrice,
-    max: defaultMaxPrice
+    min: 1000,
+    max: 100000
   },
-  start: getStartPrice(defaultMinPrice, defaultMaxPrice),
+  start: 50000,
   step: 1000,
   connect: 'lower',
   format: {
@@ -100,7 +95,7 @@ const updateSliderMinPrice = (minPrice) => {
   priceSlider.noUiSlider.updateOptions({
     range: {
       min: minPrice,
-      max: defaultMaxPrice
+      max: 100000
     },
   });
 };
@@ -161,6 +156,5 @@ adForm.addEventListener('submit', (evt) => {
     // console.log('is not valid');
   }
 });
-
 
 export {formClassNames, activateForm, deactivateForm, setAddress};
