@@ -5,7 +5,7 @@ const mapCenterCoordinates = {
   lng: 139.77100169861524
 };
 
-const map = L.map('map-canvas')
+const interactiveMap = L.map('map-canvas')
   .setView(mapCenterCoordinates, 13);
 
 L.tileLayer(
@@ -13,7 +13,7 @@ L.tileLayer(
   {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   },
-).addTo(map);
+).addTo(interactiveMap);
 
 const mainPinIcon = L.icon({
   iconUrl: './img/main-pin.svg',
@@ -29,7 +29,7 @@ const mainMarker = L.marker(
   }
 );
 
-mainMarker.addTo(map);
+mainMarker.addTo(interactiveMap);
 
 const ordinaryPinIcon = L.icon({
   iconUrl: './img/pin.svg',
@@ -37,7 +37,7 @@ const ordinaryPinIcon = L.icon({
   inconAnchor: [20, 40]
 });
 
-const markerGroup = L.layerGroup().addTo(map);
+const markerGroup = L.layerGroup().addTo(interactiveMap);
 
 const createOrdinaryMarker = (author, offer, location) => {
   const marker = L.marker(
@@ -55,4 +55,4 @@ const createOrdinaryMarker = (author, offer, location) => {
     .bindPopup(generateCard(author, offer));
 };
 
-export {map, mapCenterCoordinates, mainMarker, createOrdinaryMarker};
+export {interactiveMap, mapCenterCoordinates, mainMarker, createOrdinaryMarker};
