@@ -29,7 +29,7 @@ const conformLIstToData = (list, data, classPrefix = '') => {
 };
 
 const generatListItemsByTemplate = (template, data, dataName) => {
-  if (! data.length) {
+  if (!data || !data.length) {
     return null;
   }
 

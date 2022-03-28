@@ -1,3 +1,4 @@
+import { SIMILAR_ANNOUNCEMENTS_COUNT } from './config.js';
 import { generateCard } from './generateCards.js';
 
 const mapCenterCoordinates = {
@@ -39,7 +40,7 @@ const ordinaryPinIcon = L.icon({
 
 const markerGroup = L.layerGroup().addTo(interactiveMap);
 
-const createOrdinaryMarker = (author, offer, location) => {
+const createMarker = ({author, offer, location}) => {
   const marker = L.marker(
     {
       lat: location.lat,
@@ -55,4 +56,10 @@ const createOrdinaryMarker = (author, offer, location) => {
     .bindPopup(generateCard(author, offer));
 };
 
-export {interactiveMap, mapCenterCoordinates, mainMarker, createOrdinaryMarker};
+const createMarkers = ((announcments) => {
+  announcments.slice(0, SIMILAR_ANNOUNCEMENTS_COUNT).forEach((announcement) => {
+    createMarker(announcement);
+  });
+});
+
+export {interactiveMap, mapCenterCoordinates, mainMarker, createMarkers};
