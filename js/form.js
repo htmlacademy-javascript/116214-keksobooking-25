@@ -1,5 +1,6 @@
 import { sendData } from './api.js';
 import { SEND_DATA_URL } from './config.js';
+import { resetMap } from './map.js';
 
 // Data
 const formClassNames = ['ad-form', 'map__filters'];
@@ -13,6 +14,8 @@ const capacity = adForm.querySelector('#capacity');
 const timein = adForm.querySelector('#timein');
 const timeout = adForm.querySelector('#timeout');
 const address = adForm.querySelector('#address');
+
+const mapFiltersForm = document.querySelector('.map__filters');
 
 const capacityPerRoomNumber = {
   '1': [1],
@@ -67,8 +70,8 @@ const disableForm = (className, status) => {
 const activateForm = (className) => disableForm(className, true);
 const deactivateForm = (className) => disableForm(className, false);
 
-const setAddress = (coordinates) => {
-  address.value = `${coordinates.lat.toFixed(5)},${coordinates.lng.toFixed(5)}`;
+const setAddressFieldValue = (coordinates) => {
+  address.value = `${coordinates.lat.toFixed(5)}, ${coordinates.lng.toFixed(5)}`;
 };
 
 // Nouislider
@@ -77,7 +80,7 @@ noUiSlider.create(priceSlider, {
     min: 1000,
     max: 100000
   },
-  start: 50000,
+  start: 5000,
   step: 1000,
   connect: 'lower',
   format: {
@@ -90,10 +93,6 @@ noUiSlider.create(priceSlider, {
   }
 });
 
-priceSlider.noUiSlider.on('update', () => {
-  price.value = priceSlider.noUiSlider.get();
-});
-
 const updateSliderMinPrice = (minPrice) => {
   priceSlider.noUiSlider.updateOptions({
     range: {
@@ -102,6 +101,10 @@ const updateSliderMinPrice = (minPrice) => {
     },
   });
 };
+
+priceSlider.noUiSlider.on('update', () => {
+  price.value = priceSlider.noUiSlider.get();
+});
 
 // Pristine
 const pristineConfig = {
@@ -149,6 +152,17 @@ timeout.addEventListener('change', () => {
   timein.value = timeout.value;
 });
 
+price.addEventListener('input', (evt) => {
+  priceSlider.noUiSlider.set(evt.target.value);
+});
+
+const resetApp = () => {
+  adForm.reset();
+  priceSlider.noUiSlider.set(5000);
+  mapFiltersForm.reset();
+  resetMap();
+};
+
 adForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
   const isValid = adFormPristine.validate();
@@ -158,12 +172,12 @@ adForm.addEventListener('submit', (evt) => {
     sendData(
       SEND_DATA_URL,
       formData,
-      // console.log,
-      // console.log
+      resetApp,
+      console.log
     );
   } else {
-    // console.log('is not valid');
+    console.log('is not valid');
   }
 });
 
-export {formClassNames, activateForm, deactivateForm, setAddress};
+export {formClassNames, activateForm, deactivateForm, setAddressFieldValue};
