@@ -1,4 +1,5 @@
 import { GET_ANNOUNCEMENTS_URL } from './config.js';
+import { showDataNotLoadedError } from './util.js';
 import './map.js';
 import {interactiveMap, mapCenterCoordinates, mainMarker, createMarkers} from './map.js';
 import { activatePage, deactivatePage } from './page.js';
@@ -11,7 +12,7 @@ deactivatePage();
 interactiveMap.whenReady(() => {
   activatePage();
   setAddress(mapCenterCoordinates);
-  getData(GET_ANNOUNCEMENTS_URL, createMarkers, console.log);
+  getData(GET_ANNOUNCEMENTS_URL, createMarkers, showDataNotLoadedError);
 });
 
 mainMarker.on('moveend', (evt) => {
