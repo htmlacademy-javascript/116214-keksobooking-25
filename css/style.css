@@ -439,6 +439,10 @@ fieldset {
   display: none;
 }
 
+.ad-form__error {
+  color: red;
+}
+
 .features legend {
   padding-bottom: 5px;
 }

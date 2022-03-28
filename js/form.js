@@ -107,7 +107,7 @@ const pristineConfig = {
   successClass: 'ad-form__element--valid',
   errorTextParent: 'ad-form__element',
   errorTextTag: 'span',
-  errorTextClass: 'error-text'
+  errorTextClass: 'ad-form__error'
 };
 
 Pristine.addValidator(
