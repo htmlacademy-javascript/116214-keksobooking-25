@@ -1,6 +1,7 @@
 import { sendData } from './api.js';
 import { SEND_DATA_URL } from './config.js';
 import { resetMap } from './map.js';
+import { displaySuccessMessage } from './success-message.js';
 
 // Data
 const formClassNames = ['ad-form', 'map__filters'];
@@ -163,6 +164,11 @@ const resetApp = () => {
   resetMap();
 };
 
+const onSuccess = () => {
+  resetApp();
+  displaySuccessMessage();
+};
+
 adForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
   const isValid = adFormPristine.validate();
@@ -172,7 +178,7 @@ adForm.addEventListener('submit', (evt) => {
     sendData(
       SEND_DATA_URL,
       formData,
-      resetApp,
+      onSuccess,
       console.log
     );
   } else {

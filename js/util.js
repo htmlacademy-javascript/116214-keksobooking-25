@@ -54,6 +54,8 @@ const showDataNotLoadedError = (errorMessage) => {
   mapElement.appendChild(errorElement);
 };
 
+const isEscape = (code) => code === 'Escape';
+
 export {
   populateElement,
   formatPrice,
@@ -62,4 +64,5 @@ export {
   conformLIstToData,
   generatListItemsByTemplate,
   showDataNotLoadedError,
+  isEscape
 };
