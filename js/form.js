@@ -1,3 +1,6 @@
+import { sendData } from './api.js';
+import { SEND_DATA_URL } from './config.js';
+
 // Data
 const formClassNames = ['ad-form', 'map__filters'];
 
@@ -151,9 +154,10 @@ adForm.addEventListener('submit', (evt) => {
   const isValid = adFormPristine.validate();
 
   if (isValid) {
-    // console.log('is valid');
+    const formData = new FormData(adForm);
+    sendData(SEND_DATA_URL, formData, console.log, console.log);
   } else {
-    // console.log('is not valid');
+    console.log('is not valid');
   }
 });
 
