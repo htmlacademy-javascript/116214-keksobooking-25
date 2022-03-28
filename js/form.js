@@ -155,9 +155,14 @@ adForm.addEventListener('submit', (evt) => {
 
   if (isValid) {
     const formData = new FormData(adForm);
-    sendData(SEND_DATA_URL, formData, console.log, console.log);
+    sendData(
+      SEND_DATA_URL,
+      formData,
+      // console.log,
+      // console.log
+    );
   } else {
-    console.log('is not valid');
+    // console.log('is not valid');
   }
 });
 
