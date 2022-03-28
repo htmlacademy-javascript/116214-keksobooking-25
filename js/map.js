@@ -1,6 +1,6 @@
 import { SIMILAR_ANNOUNCEMENTS_COUNT } from './config.js';
 import { generateCard } from './generateCards.js';
-import { setAddress } from './form.js';
+import { setAddressFieldValue } from './form.js';
 
 const mapCenterCoordinates = {
   lat: 35.67920498464551,
@@ -35,7 +35,7 @@ mainMarker.addTo(interactiveMap);
 
 mainMarker.on('moveend', (evt) => {
   const markerCoordinates = evt.target.getLatLng();
-  setAddress(markerCoordinates);
+  setAddressFieldValue(markerCoordinates);
 });
 
 const ordinaryPinIcon = L.icon({
