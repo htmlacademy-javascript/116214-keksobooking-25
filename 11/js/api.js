@@ -20,18 +20,15 @@ const sendData = async (url, body, onSuccess, onFailure) => {
     response = await fetch(url,
       {
         method: 'POST',
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        }
-      },
-      body
+        body,
+      }
     );
+
     if (!response.ok) {
       throw new Error();
     }
   } catch (error) {
     onFailure('Не удалось отправить форму. Попробуйте ещё раз');
-    return;
   }
 
   const data = await response.json();
