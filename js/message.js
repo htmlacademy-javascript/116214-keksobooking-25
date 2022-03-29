@@ -8,34 +8,35 @@ const createMessage = (messageType) => {
 };
 
 const onEscapeMessage = (evt) => {
-  const code = evt.code;
-  if (isEscape(code)) {
-    message.remove();
-    document.removeEventListener('keydown', onEscapeMessage);
+  if (isEscape(evt.code)) {
+    deleteMessage();
   }
 };
 
 const onClickMessageButton = () => {
-  message.remove();
-  document.removeEventListener('keydown', onEscapeMessage);
+  deleteMessage();
 };
 
 const getMessage = (messageType) => {
   message = createMessage(messageType);
 
   message.addEventListener('click', () => {
-    message.remove();
-    document.removeEventListener('keydown', onEscapeMessage);
+    deleteMessage();
   });
-
-  if (messageType === 'error') {
-    const messageButton = message.querySelector(`.${messageType}__button`);
-    messageButton.addEventListener('click', onClickMessageButton);
-  }
 
   document.addEventListener('keydown', onEscapeMessage);
 
+  if (messageType === 'error') {
+    const messageCloseButton = message.querySelector(`.${messageType}__button`);
+    messageCloseButton.addEventListener('click', onClickMessageButton);
+  }
+
   return message;
 };
+
+function deleteMessage() {
+  message.remove();
+  document.removeEventListener('keydown', onEscapeMessage);
+}
 
 export { getMessage };
