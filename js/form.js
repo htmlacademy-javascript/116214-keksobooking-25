@@ -1,8 +1,7 @@
 import { sendData } from './api.js';
 import { SEND_DATA_URL } from './config.js';
 import { resetMap } from './map.js';
-import { displaySuccessMessage } from './success-message.js';
-import { displayErrorMessage } from './error-message.js';
+import { getMessage } from './message.js';
 
 // Data
 const formClassNames = ['ad-form', 'map__filters'];
@@ -168,13 +167,18 @@ const resetApp = () => {
 
 adFormReset.addEventListener('click', resetApp);
 
+const showMessage = (messageType) => {
+  const message = getMessage(messageType);
+  document.body.insertAdjacentElement('beforeend', message);
+};
+
 const onSuccessAdForm = () => {
   resetApp();
-  displaySuccessMessage();
+  showMessage('success');
 };
 
 const onErrorAdForm = () => {
-  displayErrorMessage();
+  showMessage('error');
 };
 
 adForm.addEventListener('submit', (evt) => {

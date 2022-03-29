@@ -17,7 +17,8 @@ const getData = async (url, onSuccess, onFailure) => {
 const sendData = async (url, body, onSuccess, onFailure) => {
   let response;
   try {
-    response = await fetch(url,
+    response = await fetch(
+      url,
       {
         method: 'POST',
         body,
@@ -29,6 +30,7 @@ const sendData = async (url, body, onSuccess, onFailure) => {
     }
   } catch (error) {
     onFailure('Не удалось отправить форму. Попробуйте ещё раз');
+    return;
   }
 
   const data = await response.json();
