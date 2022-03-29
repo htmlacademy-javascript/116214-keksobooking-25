@@ -7,36 +7,28 @@ const createMessage = (messageType) => {
   return messageTemplate.cloneNode(true);
 };
 
-const onEscapeMessage = (evt) => {
+const onEscapeDocument = (evt) => {
   if (isEscape(evt.code)) {
     deleteMessage();
   }
 };
 
-const onClickMessageButton = () => {
-  deleteMessage();
-};
+function deleteMessage() {
+  message.remove();
+  document.removeEventListener('keydown', onEscapeDocument);
+}
 
 const getMessage = (messageType) => {
   message = createMessage(messageType);
-
-  message.addEventListener('click', () => {
-    deleteMessage();
-  });
-
-  document.addEventListener('keydown', onEscapeMessage);
+  message.addEventListener('click', () => deleteMessage());
+  document.addEventListener('keydown', onEscapeDocument);
 
   if (messageType === 'error') {
     const messageCloseButton = message.querySelector(`.${messageType}__button`);
-    messageCloseButton.addEventListener('click', onClickMessageButton);
+    messageCloseButton.addEventListener('click', () => deleteMessage());
   }
 
   return message;
 };
-
-function deleteMessage() {
-  message.remove();
-  document.removeEventListener('keydown', onEscapeMessage);
-}
 
 export { getMessage };
