@@ -16,6 +16,7 @@ const capacity = adForm.querySelector('#capacity');
 const timein = adForm.querySelector('#timein');
 const timeout = adForm.querySelector('#timeout');
 const address = adForm.querySelector('#address');
+const adFormReset = adForm.querySelector('.ad-form__reset');
 
 const mapFiltersForm = document.querySelector('.map__filters');
 
@@ -164,6 +165,8 @@ const resetApp = () => {
   mapFiltersForm.reset();
   resetMap();
 };
+
+adFormReset.addEventListener('click', resetApp);
 
 const onSuccessAdForm = () => {
   resetApp();
