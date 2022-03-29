@@ -189,8 +189,6 @@ adForm.addEventListener('submit', (evt) => {
       onSuccessAdForm,
       onErrorAdForm
     );
-  } else {
-    console.log('is not valid');
   }
 });
 
