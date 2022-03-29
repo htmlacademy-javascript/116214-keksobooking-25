@@ -46,14 +46,6 @@ const formatPrice = (price) => price ? `${price} <span>₽/ночь</span>` : nu
 const formatCapacity = (rooms, guests) => rooms && guests ? `${rooms} комнаты для ${guests} гостей` : null;
 const formatTime = (checkin, checkout) => checkin && checkout ? `Заезд после ${checkin}, выезд до ${checkout}` : null;
 
-const showDataNotLoadedError = (errorMessage) => {
-  const mapElement = document.querySelector('.map');
-  const errorElement = document.createElement('div');
-  errorElement.classList.add('map__error');
-  errorElement.textContent = errorMessage;
-  mapElement.appendChild(errorElement);
-};
-
 const isEscape = (code) => code === 'Escape';
 
 export {
@@ -63,6 +55,5 @@ export {
   formatTime,
   conformLIstToData,
   generatListItemsByTemplate,
-  showDataNotLoadedError,
   isEscape
 };
