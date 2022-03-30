@@ -100,7 +100,7 @@
         </fieldset>
         <fieldset class="ad-form__element ad-form__element--wide">
           <label class="ad-form__label" for="address">Адрес (координаты)</label>
-          <input id="address" name="address" type="text" readonly>
+          <input id="address" name="address" type="text"  value="35.67920, 139.77100" readonly>
         </fieldset>
         <fieldset class="ad-form__element">
           <label class="ad-form__label" for="type">Тип жилья</label>
@@ -118,8 +118,10 @@
             id="price"
             name="price"
             type="number"
-            placeholder="1000"
             required
+            placeholder="5000"
+            value="5000"
+            step="1000"
             data-pristine-required-message="Обязательно к заполнению"
             min="1000"
             data-pristine-min-message="Минимальное значение 1000"

@@ -1,4 +1,3 @@
-import {generateMockData} from './data.js';
 import {
   populateElement,
   formatPrice,
@@ -8,7 +7,6 @@ import {
   generatListItemsByTemplate
 } from './util.js';
 
-const announcements = generateMockData();
 const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
 
 const RealtyTypesDictionary = {
@@ -43,7 +41,7 @@ const generateCard = (author, offer) => {
 
   const featureContainer = card.querySelector('.popup__features');
   const featureList = featureContainer.querySelectorAll('.popup__feature');
-  if (features.length) {
+  if (features && features.length) {
     conformLIstToData(featureList, features, 'popup__feature--');
   } else {
     featureContainer.classList.add('hidden');
@@ -67,7 +65,5 @@ const generateCard = (author, offer) => {
   return card;
 };
 
-const cards = announcements.map(({author, offer}) => generateCard(author,offer));
-
-export { cards, announcements, generateCard };
+export { generateCard };
 

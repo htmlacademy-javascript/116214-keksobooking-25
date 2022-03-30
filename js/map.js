@@ -1,4 +1,6 @@
+import { SIMILAR_ANNOUNCEMENTS_COUNT } from './config.js';
 import { generateCard } from './generateCards.js';
+import { setAddressFieldValue } from './form.js';
 
 const mapCenterCoordinates = {
   lat: 35.67920498464551,
@@ -31,6 +33,11 @@ const mainMarker = L.marker(
 
 mainMarker.addTo(interactiveMap);
 
+mainMarker.on('moveend', (evt) => {
+  const markerCoordinates = evt.target.getLatLng();
+  setAddressFieldValue(markerCoordinates);
+});
+
 const ordinaryPinIcon = L.icon({
   iconUrl: './img/pin.svg',
   iconSize: [40, 40],
@@ -39,7 +46,7 @@ const ordinaryPinIcon = L.icon({
 
 const markerGroup = L.layerGroup().addTo(interactiveMap);
 
-const createOrdinaryMarker = (author, offer, location) => {
+const createMarker = ({author, offer, location}) => {
   const marker = L.marker(
     {
       lat: location.lat,
@@ -55,4 +62,16 @@ const createOrdinaryMarker = (author, offer, location) => {
     .bindPopup(generateCard(author, offer));
 };
 
-export {interactiveMap, mapCenterCoordinates, mainMarker, createOrdinaryMarker};
+const createMarkers = ((announcments) => {
+  announcments.slice(0, SIMILAR_ANNOUNCEMENTS_COUNT).forEach((announcement) => {
+    createMarker(announcement);
+  });
+});
+
+const resetMap = () => {
+  markerGroup.clearLayers();
+  mainMarker.setLatLng(mapCenterCoordinates);
+  interactiveMap.setView(mapCenterCoordinates, 13);
+};
+
+export {interactiveMap, mapCenterCoordinates, mainMarker, createMarkers, resetMap};
