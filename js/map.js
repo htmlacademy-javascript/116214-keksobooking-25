@@ -68,10 +68,15 @@ const createMarkers = ((announcments) => {
   });
 });
 
+const displayMarkers = (announcments) => {
+  markerGroup.clearLayers();
+  createMarkers(announcments);
+};
+
 const resetMap = () => {
   markerGroup.clearLayers();
   mainMarker.setLatLng(mapCenterCoordinates);
   interactiveMap.setView(mapCenterCoordinates, 13);
 };
 
-export {interactiveMap, mapCenterCoordinates, mainMarker, createMarkers, resetMap};
+export {interactiveMap, mapCenterCoordinates, mainMarker, displayMarkers, resetMap};
