@@ -1,6 +1,7 @@
-import { SIMILAR_ANNOUNCEMENTS_COUNT } from './config.js';
 import { generateCard } from './generateCards.js';
 import { setAddressFieldValue } from './form.js';
+
+const SIMILAR_ANNOUNCEMENTS_COUNT = 10;
 
 const mapCenterCoordinates = {
   lat: 35.67920498464551,

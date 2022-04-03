@@ -1,5 +1,3 @@
-import { GET_ANNOUNCEMENTS_URL } from './config.js';
-import { showDataNotLoadedError } from './page.js';
 import './map.js';
 import {interactiveMap, displayMarkers} from './map.js';
 import './form.js';
@@ -15,14 +13,14 @@ const onDataLoadedSuccess = (announcements) => {
 };
 
 const onDataLoadFail = () => {
-  showDataNotLoadedError();
+  const mapElement = document.querySelector('.map');
+  const errorElement = document.createElement('div');
+  errorElement.classList.add('map__error');
+  errorElement.textContent = 'Данные не были загружены. Попробуйте еще раз!';
+  mapElement.appendChild(errorElement);
 };
 
 interactiveMap.whenReady(() => {
   activateForm(adForm);
-  getData(
-    GET_ANNOUNCEMENTS_URL,
-    onDataLoadedSuccess,
-    onDataLoadFail
-  );
+  getData(onDataLoadedSuccess, onDataLoadFail);
 });

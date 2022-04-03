@@ -1,5 +1,4 @@
 import { sendData } from './api.js';
-import { SEND_DATA_URL } from './config.js';
 import { resetMap } from './map.js';
 import { getMessage } from './message.js';
 
@@ -190,7 +189,6 @@ adForm.addEventListener('submit', (evt) => {
   if (isValid) {
     const formData = new FormData(adForm);
     sendData(
-      SEND_DATA_URL,
       formData,
       onSuccessAdForm,
       onErrorAdForm

@@ -1,7 +1,7 @@
-const getData = async (url, onSuccess, onFailure) => {
+const getData = async (onSuccess, onFailure) => {
   let response;
   try {
-    response = await fetch(url);
+    response = await fetch('https://25.javascript.pages.academy/keksobooking/data');
     if (!response.ok) {
       throw new Error();
     }
@@ -14,11 +14,11 @@ const getData = async (url, onSuccess, onFailure) => {
   onSuccess(data);
 };
 
-const sendData = async (url, body, onSuccess, onFailure) => {
+const sendData = async (body, onSuccess, onFailure) => {
   let response;
   try {
     response = await fetch(
-      url,
+      'https://25.javascript.pages.academy/keksobooking',
       {
         method: 'POST',
         body,
