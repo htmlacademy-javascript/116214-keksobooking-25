@@ -3,8 +3,6 @@ import { resetMap } from './map.js';
 import { getMessage } from './message.js';
 
 // Data
-const formClassNames = ['ad-form', 'map__filters'];
-
 const adForm = document.querySelector('.ad-form');
 const type = adForm.querySelector('#type');
 const price = adForm.querySelector('#price');
@@ -196,4 +194,4 @@ adForm.addEventListener('submit', (evt) => {
   }
 });
 
-export {formClassNames, adForm, mapFiltersForm, activateForm, deactivateForm, setAddressFieldValue};
+export {adForm, mapFiltersForm, activateForm, deactivateForm, setAddressFieldValue};
