@@ -12,12 +12,16 @@ const onDataLoadedSuccess = (announcements) => {
   activateForm(mapFiltersForm);
 };
 
-const onDataLoadFail = () => {
+const showDataNotLoadedError = () => {
   const mapElement = document.querySelector('.map');
   const errorElement = document.createElement('div');
   errorElement.classList.add('map__error');
   errorElement.textContent = 'Данные не были загружены. Попробуйте еще раз!';
   mapElement.appendChild(errorElement);
+};
+
+const onDataLoadFail = () => {
+  showDataNotLoadedError();
 };
 
 interactiveMap.whenReady(() => {
