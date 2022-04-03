@@ -55,22 +55,24 @@ const getCapacityErrorMessage = () => {
   );
 };
 
-const disableForm = (className, status) => {
-  const form = document.querySelector(`.${className}`);
-
-  Array.from(form.elements).forEach((item) => {
-    item.disabled = !status;
+const disableElements = (elements, status) => {
+  Array.from(elements).forEach((item) => {
+    item.disabled = status;
   });
-  Array.from(form.querySelector('fieldset')).forEach((item) => {
-    item.disabled = !status;
-  });
+};
 
-  form.classList[status ? 'remove' : 'add'](`${className}--disabled`);
+const disableFormElement = (form, status) => {
+  form.classList[status ? 'add' : 'remove'](`${form.classList[0]}--disabled`);
+};
+
+const disableForm = (form, status) => {
+  disableElements(form.elements, status);
+  disableFormElement(form, status);
 };
 
 // Interface
-const activateForm = (className) => disableForm(className, true);
-const deactivateForm = (className) => disableForm(className, false);
+const activateForm = (form) => disableForm(form, false);
+const deactivateForm = (form) => disableForm(form, true);
 
 const setAddressFieldValue = (coordinates) => {
   address.value = `${coordinates.lat.toFixed(5)}, ${coordinates.lng.toFixed(5)}`;
@@ -196,4 +198,4 @@ adForm.addEventListener('submit', (evt) => {
   }
 });
 
-export {formClassNames, activateForm, deactivateForm, setAddressFieldValue};
+export {formClassNames, adForm, mapFiltersForm, activateForm, deactivateForm, setAddressFieldValue};
