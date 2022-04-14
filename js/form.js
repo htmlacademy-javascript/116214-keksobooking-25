@@ -80,14 +80,15 @@ const setFilter = (evt) => {
 };
 
 const RERENDER_DELAY = 1000;
+const debounceHandler = debounce(
+  (announcements) => onDataLoadedSuccess(announcements),
+  RERENDER_DELAY
+);
 
 const onFilterChange = (evt) => {
   setFilter(evt);
   getData(
-    debounce(
-      (announcements) => onDataLoadedSuccess(announcements),
-      RERENDER_DELAY
-    ),
+    debounceHandler,
     onDataLoadFail
   );
 };
