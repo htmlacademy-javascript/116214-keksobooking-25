@@ -1,5 +1,5 @@
 import { filter, activateForm, mapFiltersForm } from './form.js';
-import { sortAnnouncements, getAnnouncementRank } from './filter.js';
+import { filterAnnouncements } from './filter.js';
 import { displayMarkers } from './map.js';
 import { SIMILAR_ANNOUNCEMENTS_COUNT } from './map.js';
 
@@ -16,12 +16,11 @@ const onDataLoadFail = (errorMessage) => {
 };
 
 const onDataLoadedSuccess = (announcements) => {
-  const sortedAnnouncements = filter.apply ?
-    sortAnnouncements(announcements) :
+  const announcementsToDisplay = filter.apply ?
+    filterAnnouncements(announcements) :
     announcements;
 
-  const limitedAnnouncements = sortedAnnouncements
-    .filter(({offer}) => getAnnouncementRank(offer) === filter.rank)
+  const limitedAnnouncements = announcementsToDisplay
     .slice(0, SIMILAR_ANNOUNCEMENTS_COUNT);
 
   displayMarkers(limitedAnnouncements);
