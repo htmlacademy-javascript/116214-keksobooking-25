@@ -48,6 +48,14 @@ const formatTime = (checkin, checkout) => checkin && checkout ? `Заезд по
 
 const isEscape = (code) => code === 'Escape';
 
+const debounce = (callback, timeoutDelay) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
 export {
   populateElement,
   formatPrice,
@@ -55,5 +63,6 @@ export {
   formatTime,
   conformLIstToData,
   generatListItemsByTemplate,
-  isEscape
+  isEscape,
+  debounce
 };

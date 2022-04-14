@@ -1,6 +1,7 @@
-import { SIMILAR_ANNOUNCEMENTS_COUNT } from './config.js';
 import { generateCard } from './generateCards.js';
 import { setAddressFieldValue } from './form.js';
+
+const SIMILAR_ANNOUNCEMENTS_COUNT = 10;
 
 const mapCenterCoordinates = {
   lat: 35.67920498464551,
@@ -63,10 +64,15 @@ const createMarker = ({author, offer, location}) => {
 };
 
 const createMarkers = ((announcments) => {
-  announcments.slice(0, SIMILAR_ANNOUNCEMENTS_COUNT).forEach((announcement) => {
+  announcments.forEach((announcement) => {
     createMarker(announcement);
   });
 });
+
+const displayMarkers = (announcments) => {
+  markerGroup.clearLayers();
+  createMarkers(announcments);
+};
 
 const resetMap = () => {
   markerGroup.clearLayers();
@@ -74,4 +80,11 @@ const resetMap = () => {
   interactiveMap.setView(mapCenterCoordinates, 13);
 };
 
-export {interactiveMap, mapCenterCoordinates, mainMarker, createMarkers, resetMap};
+export {
+  interactiveMap,
+  mapCenterCoordinates,
+  mainMarker,
+  displayMarkers,
+  resetMap,
+  SIMILAR_ANNOUNCEMENTS_COUNT
+};

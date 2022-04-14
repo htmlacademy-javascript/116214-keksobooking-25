@@ -1,12 +1,7 @@
-import {formClassNames, activateForm, deactivateForm} from './form.js';
-
-const activatePage = () => {
-  formClassNames.forEach((className) => activateForm(className));
-};
-
-const deactivatePage = () => {
-  formClassNames.forEach((className) => deactivateForm(className));
-};
+import { filter, activateForm, mapFiltersForm } from './form.js';
+import { filterAnnouncements } from './filter.js';
+import { displayMarkers } from './map.js';
+import { SIMILAR_ANNOUNCEMENTS_COUNT } from './map.js';
 
 const showDataNotLoadedError = (errorMessage) => {
   const mapElement = document.querySelector('.map');
@@ -16,4 +11,22 @@ const showDataNotLoadedError = (errorMessage) => {
   mapElement.appendChild(errorElement);
 };
 
-export {activatePage, deactivatePage, showDataNotLoadedError};
+const onDataLoadFail = (errorMessage) => {
+  showDataNotLoadedError(errorMessage);
+};
+
+const onDataLoadedSuccess = (announcements) => {
+  const announcementsToDisplay = filter.apply ?
+    filterAnnouncements(announcements) :
+    announcements;
+
+  const limitedAnnouncements = announcementsToDisplay
+    .slice(0, SIMILAR_ANNOUNCEMENTS_COUNT);
+
+  displayMarkers(limitedAnnouncements);
+  activateForm(mapFiltersForm);
+};
+
+const setDataLoadedSuccess = (announcements) => onDataLoadedSuccess(announcements);
+
+export { onDataLoadFail, onDataLoadedSuccess, setDataLoadedSuccess };

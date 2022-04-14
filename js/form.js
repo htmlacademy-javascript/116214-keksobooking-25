@@ -1,11 +1,11 @@
 import { sendData } from './api.js';
-import { SEND_DATA_URL } from './config.js';
 import { resetMap } from './map.js';
 import { getMessage } from './message.js';
+import { getData } from './api.js';
+import { onDataLoadFail, onDataLoadedSuccess } from './page.js';
+import { debounce } from './util.js';
 
 // Data
-const formClassNames = ['ad-form', 'map__filters'];
-
 const adForm = document.querySelector('.ad-form');
 const type = adForm.querySelector('#type');
 const price = adForm.querySelector('#price');
@@ -18,6 +18,84 @@ const address = adForm.querySelector('#address');
 const adFormReset = adForm.querySelector('.ad-form__reset');
 
 const mapFiltersForm = document.querySelector('.map__filters');
+
+let filter = {
+  apply: false,
+  rank: 0,
+  type: 'any',
+  price: 'any',
+  rooms: 'any',
+  guests: 'any',
+  features: []
+};
+
+const setFilter = (evt) => {
+  let rank = 0;
+
+  const filterName = evt.target.name.split('-')[1];
+  const filterValue = evt.target.value;
+
+  if (filterName in filter) {
+    filter = Object.assign(filter, {[filterName]: filterValue});
+  } else {
+    if (evt.target.checked) {
+      filter.features.push(filterValue);
+    } else {
+      filter.features.splice(filter.features.indexOf(filterValue), 1);
+    }
+  }
+
+  if (filter.type !== 'any') {
+    rank += 1;
+  }
+  if (filter.price !== 'any') {
+    rank += 1;
+  }
+  if (filter.rooms !== 'any') {
+    rank += 1;
+  }
+  if (filter.guests !== 'any') {
+    rank += 1;
+  }
+  if (filter.features.includes('wifi')) {
+    rank += 1;
+  }
+  if (filter.features.includes('dishwasher')) {
+    rank += 1;
+  }
+  if (filter.features.includes('parking')) {
+    rank += 1;
+  }
+  if (filter.features.includes('washer')) {
+    rank += 1;
+  }
+  if (filter.features.includes('elevator')) {
+    rank += 1;
+  }
+  if (filter.features.includes('conditioner')) {
+    rank += 1;
+  }
+  filter.rank = rank;
+  filter.apply = filter.rank > 0;
+};
+
+const RERENDER_DELAY = 1000;
+
+const onFilterChange = (evt) => {
+  setFilter(evt);
+  getData(
+    debounce(
+      (announcements) => onDataLoadedSuccess(announcements),
+      RERENDER_DELAY
+    ),
+    onDataLoadFail
+  );
+};
+
+mapFiltersForm.addEventListener('change', (evt) => {
+  onFilterChange(evt);
+});
+
 
 const capacityPerRoomNumber = {
   '1': [1],
@@ -55,22 +133,24 @@ const getCapacityErrorMessage = () => {
   );
 };
 
-const disableForm = (className, status) => {
-  const form = document.querySelector(`.${className}`);
-
-  Array.from(form.elements).forEach((item) => {
-    item.disabled = !status;
+const disableElements = (elements, status) => {
+  Array.from(elements).forEach((item) => {
+    item.disabled = status;
   });
-  Array.from(form.querySelector('fieldset')).forEach((item) => {
-    item.disabled = !status;
-  });
+};
 
-  form.classList[status ? 'remove' : 'add'](`${className}--disabled`);
+const disableFormElement = (form, status) => {
+  form.classList[status ? 'add' : 'remove'](`${form.classList[0]}--disabled`);
+};
+
+const disableForm = (form, status) => {
+  disableElements(form.elements, status);
+  disableFormElement(form, status);
 };
 
 // Interface
-const activateForm = (className) => disableForm(className, true);
-const deactivateForm = (className) => disableForm(className, false);
+const activateForm = (form) => disableForm(form, false);
+const deactivateForm = (form) => disableForm(form, true);
 
 const setAddressFieldValue = (coordinates) => {
   address.value = `${coordinates.lat.toFixed(5)}, ${coordinates.lng.toFixed(5)}`;
@@ -188,7 +268,6 @@ adForm.addEventListener('submit', (evt) => {
   if (isValid) {
     const formData = new FormData(adForm);
     sendData(
-      SEND_DATA_URL,
       formData,
       onSuccessAdForm,
       onErrorAdForm
@@ -196,4 +275,11 @@ adForm.addEventListener('submit', (evt) => {
   }
 });
 
-export {formClassNames, activateForm, deactivateForm, setAddressFieldValue};
+export {
+  adForm,
+  mapFiltersForm,
+  activateForm,
+  deactivateForm,
+  setAddressFieldValue,
+  filter
+};

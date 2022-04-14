@@ -1,13 +1,14 @@
-import { GET_ANNOUNCEMENTS_URL } from './config.js';
-import { activatePage, deactivatePage, showDataNotLoadedError } from './page.js';
 import './map.js';
-import {interactiveMap, createMarkers} from './map.js';
+import {interactiveMap} from './map.js';
 import './form.js';
+import { activateForm, deactivateForm, adForm, mapFiltersForm } from './form.js';
 import { getData } from './api.js';
+import { onDataLoadFail, onDataLoadedSuccess } from './page.js';
 
-deactivatePage();
+deactivateForm(adForm);
+deactivateForm(mapFiltersForm);
 
 interactiveMap.whenReady(() => {
-  activatePage();
-  getData(GET_ANNOUNCEMENTS_URL, createMarkers, showDataNotLoadedError);
+  activateForm(adForm);
+  getData(onDataLoadedSuccess, onDataLoadFail);
 });
