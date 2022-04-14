@@ -23,7 +23,7 @@ const acceptPrice = (itemValue = undefined) => {
   }
 };
 
-const acceptRooms = (itemValue) => {
+const acceptRooms = (itemValue = undefined) => {
   const filterValue = filter.rooms;
   if (! filterValue) {
     return false;
@@ -31,7 +31,7 @@ const acceptRooms = (itemValue) => {
   return parseInt(filterValue, 10) === itemValue;
 };
 
-const acceptGuests = (itemValue) => {
+const acceptGuests = (itemValue = undefined) => {
   const filterValue = filter.guests;
   if (! filterValue) {
     return false;
@@ -39,52 +39,12 @@ const acceptGuests = (itemValue) => {
   return parseInt(filterValue, 10) === itemValue;
 };
 
-const acceptWifi = (features) => {
-  const filterValue = filter.features.includes('wifi');
+const acceptFeature = (feature, features) => {
+  const filterValue = filter.features.includes(feature);
   if (! filterValue) {
     return false;
   }
-  return features.includes('wifi');
-};
-
-const acceptDishwasher = (features) => {
-  const filterValue = filter.features.includes('dishwasher');
-  if (! filterValue) {
-    return false;
-  }
-  return features.includes('dishwasher');
-};
-
-const acceptParking = (features) => {
-  const filterValue = filter.features.includes('parking');
-  if (! filterValue) {
-    return false;
-  }
-  return features.includes('parking');
-};
-
-const acceptWasher = (features) => {
-  const filterValue = filter.features.includes('washer');
-  if (! filterValue) {
-    return false;
-  }
-  return features.includes('washer');
-};
-
-const acceptElevator = (features) => {
-  const filterValue = filter.features.includes('elevator');
-  if (! filterValue) {
-    return false;
-  }
-  return features.includes('elevator');
-};
-
-const acceptConditioner = (features) => {
-  const filterValue = filter.features.includes('conditioner');
-  if (! filterValue) {
-    return false;
-  }
-  return features.includes('conditioner');
+  return features.includes(feature);
 };
 
 const getAnnouncementRank = ({type = 'any', price = 'any', rooms = 'any', guests = 'any', features = []}) => {
@@ -106,29 +66,11 @@ const getAnnouncementRank = ({type = 'any', price = 'any', rooms = 'any', guests
     rank += 1;
   }
 
-  if ( acceptWifi(features) ) {
-    rank += 1;
-  }
-
-  if ( acceptDishwasher(features) ) {
-    rank += 1;
-  }
-
-  if ( acceptParking(features) ) {
-    rank += 1;
-  }
-
-  if ( acceptWasher(features) ) {
-    rank += 1;
-  }
-
-  if ( acceptElevator(features) ) {
-    rank += 1;
-  }
-
-  if ( acceptConditioner(features) ) {
-    rank += 1;
-  }
+  features.forEach((item, index, array) => {
+    if (acceptFeature(item, array)) {
+      rank += 1;
+    }
+  });
 
   return rank;
 };
