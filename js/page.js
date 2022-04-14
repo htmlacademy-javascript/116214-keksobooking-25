@@ -27,4 +27,6 @@ const onDataLoadedSuccess = (announcements) => {
   activateForm(mapFiltersForm);
 };
 
-export { onDataLoadFail, onDataLoadedSuccess };
+const setDataLoadedSuccess = (announcements) => onDataLoadedSuccess(announcements);
+
+export { onDataLoadFail, onDataLoadedSuccess, setDataLoadedSuccess };

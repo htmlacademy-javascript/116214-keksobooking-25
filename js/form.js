@@ -3,6 +3,7 @@ import { resetMap } from './map.js';
 import { getMessage } from './message.js';
 import { getData } from './api.js';
 import { onDataLoadFail, onDataLoadedSuccess } from './page.js';
+import { debounce } from './util.js';
 
 // Data
 const adForm = document.querySelector('.ad-form');
@@ -78,9 +79,17 @@ const setFilter = (evt) => {
   filter.apply = filter.rank > 0;
 };
 
+const RERENDER_DELAY = 1000;
+
 const onFilterChange = (evt) => {
   setFilter(evt);
-  getData(onDataLoadedSuccess, onDataLoadFail);
+  getData(
+    debounce(
+      (announcements) => onDataLoadedSuccess(announcements),
+      RERENDER_DELAY
+    ),
+    onDataLoadFail
+  );
 };
 
 mapFiltersForm.addEventListener('change', (evt) => {
