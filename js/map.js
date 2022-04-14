@@ -64,7 +64,7 @@ const createMarker = ({author, offer, location}) => {
 };
 
 const createMarkers = ((announcments) => {
-  announcments.slice(0, SIMILAR_ANNOUNCEMENTS_COUNT).forEach((announcement) => {
+  announcments.forEach((announcement) => {
     createMarker(announcement);
   });
 });
@@ -80,4 +80,11 @@ const resetMap = () => {
   interactiveMap.setView(mapCenterCoordinates, 13);
 };
 
-export {interactiveMap, mapCenterCoordinates, mainMarker, displayMarkers, resetMap};
+export {
+  interactiveMap,
+  mapCenterCoordinates,
+  mainMarker,
+  displayMarkers,
+  resetMap,
+  SIMILAR_ANNOUNCEMENTS_COUNT
+};

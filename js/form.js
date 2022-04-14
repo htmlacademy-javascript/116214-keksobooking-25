@@ -1,6 +1,8 @@
 import { sendData } from './api.js';
 import { resetMap } from './map.js';
 import { getMessage } from './message.js';
+import { getData } from './api.js';
+import { onDataLoadFail, onDataLoadedSuccess } from './page.js';
 
 // Data
 const adForm = document.querySelector('.ad-form');
@@ -15,6 +17,75 @@ const address = adForm.querySelector('#address');
 const adFormReset = adForm.querySelector('.ad-form__reset');
 
 const mapFiltersForm = document.querySelector('.map__filters');
+
+let filter = {
+  apply: false,
+  rank: 0,
+  type: 'any',
+  price: 'any',
+  rooms: 'any',
+  guests: 'any',
+  features: []
+};
+
+const setFilter = () => {
+  let rank = 0;
+  if (filter.type !== 'any') {
+    rank += 1;
+  }
+  if (filter.price !== 'any') {
+    rank += 1;
+  }
+  if (filter.rooms !== 'any') {
+    rank += 1;
+  }
+  if (filter.guests !== 'any') {
+    rank += 1;
+  }
+  if (filter.features.includes('wifi')) {
+    rank += 0.5;
+  }
+  if (filter.features.includes('dishwasher')) {
+    rank += 0.5;
+  }
+  if (filter.features.includes('parking')) {
+    rank += 0.5;
+  }
+  if (filter.features.includes('washer')) {
+    rank += 0.5;
+  }
+  if (filter.features.includes('elevator')) {
+    rank += 0.5;
+  }
+  if (filter.features.includes('conditioner')) {
+    rank += 0.5;
+  }
+  filter.rank = rank;
+  filter.apply = filter.rank > 0;
+};
+
+const onFilterChange = (evt) => {
+  const filterName = evt.target.name.split('-')[1];
+  const filterValue = evt.target.value;
+
+  if (filterName in filter) {
+    filter = Object.assign(filter, {[filterName]: filterValue});
+  } else {
+    if (evt.target.checked) {
+      filter.features.push(filterValue);
+    } else {
+      filter.features.splice(filter.features.indexOf(filterValue), 1);
+    }
+  }
+
+  setFilter();
+  getData(onDataLoadedSuccess, onDataLoadFail);
+};
+
+mapFiltersForm.addEventListener('change', (evt) => {
+  onFilterChange(evt);
+});
+
 
 const capacityPerRoomNumber = {
   '1': [1],
@@ -194,4 +265,11 @@ adForm.addEventListener('submit', (evt) => {
   }
 });
 
-export {adForm, mapFiltersForm, activateForm, deactivateForm, setAddressFieldValue};
+export {
+  adForm,
+  mapFiltersForm,
+  activateForm,
+  deactivateForm,
+  setAddressFieldValue,
+  filter
+};
