@@ -21,8 +21,8 @@ const onDataLoadedSuccess = (announcements) => {
     announcements;
 
   const limitedAnnouncements = sortedAnnouncements
-    .slice(0, SIMILAR_ANNOUNCEMENTS_COUNT)
-    .filter(({offer}) => getAnnouncementRank(offer) === filter.rank);
+    .filter(({offer}) => getAnnouncementRank(offer) === filter.rank)
+    .slice(0, SIMILAR_ANNOUNCEMENTS_COUNT);
 
   displayMarkers(limitedAnnouncements);
   activateForm(mapFiltersForm);
