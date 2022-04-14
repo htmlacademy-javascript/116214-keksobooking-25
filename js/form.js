@@ -43,22 +43,22 @@ const setFilter = () => {
     rank += 1;
   }
   if (filter.features.includes('wifi')) {
-    rank += 0.5;
+    rank += 1;
   }
   if (filter.features.includes('dishwasher')) {
-    rank += 0.5;
+    rank += 1;
   }
   if (filter.features.includes('parking')) {
-    rank += 0.5;
+    rank += 1;
   }
   if (filter.features.includes('washer')) {
-    rank += 0.5;
+    rank += 1;
   }
   if (filter.features.includes('elevator')) {
-    rank += 0.5;
+    rank += 1;
   }
   if (filter.features.includes('conditioner')) {
-    rank += 0.5;
+    rank += 1;
   }
   filter.rank = rank;
   filter.apply = filter.rank > 0;

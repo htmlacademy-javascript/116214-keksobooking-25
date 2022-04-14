@@ -107,27 +107,27 @@ const getAnnouncementRank = ({type = 'any', price = 'any', rooms = 'any', guests
   }
 
   if ( acceptWifi(features) ) {
-    rank += 0.5;
+    rank += 1;
   }
 
   if ( acceptDishwasher(features) ) {
-    rank += 0.5;
+    rank += 1;
   }
 
   if ( acceptParking(features) ) {
-    rank += 0.5;
+    rank += 1;
   }
 
   if ( acceptWasher(features) ) {
-    rank += 0.5;
+    rank += 1;
   }
 
   if ( acceptElevator(features) ) {
-    rank += 0.5;
+    rank += 1;
   }
 
   if ( acceptConditioner(features) ) {
-    rank += 0.5;
+    rank += 1;
   }
 
   return rank;
