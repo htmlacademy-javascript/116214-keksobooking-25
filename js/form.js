@@ -28,8 +28,22 @@ let filter = {
   features: []
 };
 
-const setFilter = () => {
+const setFilter = (evt) => {
   let rank = 0;
+
+  const filterName = evt.target.name.split('-')[1];
+  const filterValue = evt.target.value;
+
+  if (filterName in filter) {
+    filter = Object.assign(filter, {[filterName]: filterValue});
+  } else {
+    if (evt.target.checked) {
+      filter.features.push(filterValue);
+    } else {
+      filter.features.splice(filter.features.indexOf(filterValue), 1);
+    }
+  }
+
   if (filter.type !== 'any') {
     rank += 1;
   }
@@ -65,20 +79,7 @@ const setFilter = () => {
 };
 
 const onFilterChange = (evt) => {
-  const filterName = evt.target.name.split('-')[1];
-  const filterValue = evt.target.value;
-
-  if (filterName in filter) {
-    filter = Object.assign(filter, {[filterName]: filterValue});
-  } else {
-    if (evt.target.checked) {
-      filter.features.push(filterValue);
-    } else {
-      filter.features.splice(filter.features.indexOf(filterValue), 1);
-    }
-  }
-
-  setFilter();
+  setFilter(evt);
   getData(onDataLoadedSuccess, onDataLoadFail);
 };
 
