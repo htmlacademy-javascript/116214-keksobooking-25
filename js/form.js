@@ -88,19 +88,21 @@ const setFilter = (evt) => {
   filter.apply = filter.rank > 0;
 };
 
-const RERENDER_DELAY = 1000;
-const debounceHandler = debounce(
-  (announcements) => onDataLoadedSuccess(announcements),
-  RERENDER_DELAY
-);
-
-const onFilterChange = (evt) => {
+const filterChangeHandler = (evt) => {
   setFilter(evt);
   getData(
-    debounceHandler,
+    onDataLoadedSuccess,
     onDataLoadFail
   );
 };
+
+const RERENDER_DELAY = 500;
+const debounceHandler = debounce(
+  (evt) => filterChangeHandler(evt),
+  RERENDER_DELAY
+);
+
+const onFilterChange = (evt) => debounceHandler(evt);
 
 mapFiltersForm.addEventListener('change', (evt) => {
   onFilterChange(evt);

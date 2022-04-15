@@ -48,7 +48,7 @@ const formatTime = (checkin, checkout) => checkin && checkout ? `Заезд по
 
 const isEscape = (code) => code === 'Escape';
 
-const debounce = (callback, timeoutDelay) => {
+const debounce = (callback, timeoutDelay = 500) => {
   let timeoutId;
   return (...rest) => {
     clearTimeout(timeoutId);
