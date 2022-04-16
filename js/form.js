@@ -186,7 +186,6 @@ noUiSlider.create(priceSlider, {
     max: 100000
   },
   start: 5000,
-  step: 1000,
   connect: 'lower',
   format: {
     to: function(value) {
@@ -257,7 +256,7 @@ timeout.addEventListener('change', () => {
   timein.value = timeout.value;
 });
 
-price.addEventListener('input', (evt) => {
+price.addEventListener('change', (evt) => {
   priceSlider.noUiSlider.set(evt.target.value);
 });
 
