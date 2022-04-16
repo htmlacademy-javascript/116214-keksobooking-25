@@ -140,9 +140,14 @@ const getCapacityErrorMessage = () => {
 };
 
 const disableElements = (elements, status) => {
-  Array.from(elements).forEach((item) => {
-    item.disabled = status;
-  });
+  const elems = Array.from(elements);
+  for (let i=0; i<elems.length; i++) {
+    const item = elems[i];
+    const tagName = item.tagName;
+    if (tagName === 'FIELDSET' || ! item.closest('fieldset')) {
+      item.disabled = status;
+    }
+  }
 };
 
 const disableFormElement = (form, status) => {
