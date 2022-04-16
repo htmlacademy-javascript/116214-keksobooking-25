@@ -155,12 +155,20 @@ const disableFormElement = (form, status) => {
   form.classList[status ? 'add' : 'remove'](`${form.classList[0]}--disabled`);
 };
 
+const disableSlider = (form, slider, status) => {
+  if (form.contains(slider)) {
+    if (status) {
+      slider.setAttribute('disabled', status);
+    } else {
+      slider.removeAttribute('disabled');
+    }
+  }
+};
+
 const disableForm = (form, status) => {
   disableElements(form.elements, status);
   disableFormElement(form, status);
-  if (form.contains(priceSlider)) {
-    priceSlider.setAttribute('disabled', status);
-  }
+  disableSlider(form, priceSlider, status);
 };
 
 // Interface
