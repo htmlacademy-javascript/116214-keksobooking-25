@@ -1,9 +1,9 @@
 import { sendData } from './api.js';
 import { resetMap } from './map.js';
 import { getMessage } from './message.js';
-import { getData } from './api.js';
-import { onDataLoadFail, onDataLoadedSuccess } from './page.js';
+import { displayData } from './page.js';
 import { debounce } from './util.js';
+import { setOnChangePhotoInput } from './photo.js';
 
 // Data
 const adForm = document.querySelector('.ad-form');
@@ -16,6 +16,14 @@ const timein = adForm.querySelector('#timein');
 const timeout = adForm.querySelector('#timeout');
 const address = adForm.querySelector('#address');
 const adFormReset = adForm.querySelector('.ad-form__reset');
+
+const avatarChooser = adForm.querySelector('.ad-form__field input');
+const avatarPrevieu = adForm.querySelector('.ad-form-header__preview');
+const housingChooser = adForm.querySelector('.ad-form__upload input');
+const housingPrevieu = adForm.querySelector('.ad-form__photo');
+
+setOnChangePhotoInput(avatarChooser, avatarPrevieu);
+setOnChangePhotoInput(housingChooser, housingPrevieu);
 
 const mapFiltersForm = document.querySelector('.map__filters');
 
@@ -79,17 +87,15 @@ const setFilter = (evt) => {
   filter.apply = filter.rank > 0;
 };
 
-const RERENDER_DELAY = 1000;
+const RERENDER_DELAY = 500;
+const debounceHandler = debounce(
+  () => displayData(),
+  RERENDER_DELAY
+);
 
 const onFilterChange = (evt) => {
   setFilter(evt);
-  getData(
-    debounce(
-      (announcements) => onDataLoadedSuccess(announcements),
-      RERENDER_DELAY
-    ),
-    onDataLoadFail
-  );
+  debounceHandler();
 };
 
 mapFiltersForm.addEventListener('change', (evt) => {
