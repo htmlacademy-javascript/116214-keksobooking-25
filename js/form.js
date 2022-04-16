@@ -157,6 +157,9 @@ const disableFormElement = (form, status) => {
 const disableForm = (form, status) => {
   disableElements(form.elements, status);
   disableFormElement(form, status);
+  if (form.contains(priceSlider)) {
+    priceSlider.setAttribute('disabled', status);
+  }
 };
 
 // Interface
