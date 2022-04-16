@@ -1,8 +1,7 @@
 import { sendData } from './api.js';
 import { resetMap } from './map.js';
 import { getMessage } from './message.js';
-import { getData } from './api.js';
-import { onDataLoadFail, onDataLoadedSuccess } from './page.js';
+import { displayData } from './page.js';
 import { debounce } from './util.js';
 import { setOnChangePhotoInput } from './photo.js';
 
@@ -88,21 +87,16 @@ const setFilter = (evt) => {
   filter.apply = filter.rank > 0;
 };
 
-const filterChangeHandler = (evt) => {
-  setFilter(evt);
-  getData(
-    onDataLoadedSuccess,
-    onDataLoadFail
-  );
-};
-
 const RERENDER_DELAY = 500;
 const debounceHandler = debounce(
-  (evt) => filterChangeHandler(evt),
+  () => displayData(),
   RERENDER_DELAY
 );
 
-const onFilterChange = (evt) => debounceHandler(evt);
+const onFilterChange = (evt) => {
+  setFilter(evt);
+  debounceHandler();
+};
 
 mapFiltersForm.addEventListener('change', (evt) => {
   onFilterChange(evt);

@@ -1,7 +1,7 @@
 import { filter, activateForm, mapFiltersForm } from './form.js';
 import { filterAnnouncements } from './filter.js';
-import { displayMarkers } from './map.js';
-import { SIMILAR_ANNOUNCEMENTS_COUNT } from './map.js';
+import { displayMarkers, SIMILAR_ANNOUNCEMENTS_COUNT } from './map.js';
+import { saveData, getData } from './localStorage.js';
 
 const showDataNotLoadedError = (errorMessage) => {
   const mapElement = document.querySelector('.map');
@@ -15,18 +15,30 @@ const onDataLoadFail = (errorMessage) => {
   showDataNotLoadedError(errorMessage);
 };
 
-const onDataLoadedSuccess = (announcements) => {
-  const announcementsToDisplay = filter.apply ?
-    filterAnnouncements(announcements) :
-    announcements;
+const filterData = (data) =>  filter.apply ? filterAnnouncements(data) : data;
+const limitData = (data) => data.slice(0, SIMILAR_ANNOUNCEMENTS_COUNT);
 
-  const limitedAnnouncements = announcementsToDisplay
-    .slice(0, SIMILAR_ANNOUNCEMENTS_COUNT);
+const displayData = () => {
+  let announcements = getData('announcements');
 
-  displayMarkers(limitedAnnouncements);
-  activateForm(mapFiltersForm);
+  if (! announcements) {
+    showDataNotLoadedError('Данные отсутствуют. Попробуйте еще раз.');
+    return false;
+  }
+
+  announcements = filterData(announcements);
+  announcements = limitData(announcements);
+  displayMarkers(announcements);
+
+  return true;
 };
 
-const setDataLoadedSuccess = (announcements) => onDataLoadedSuccess(announcements);
+const onDataLoadedSuccess = (data) => {
+  saveData('announcements', data);
 
-export { onDataLoadFail, onDataLoadedSuccess, setDataLoadedSuccess };
+  if (displayData()) {
+    activateForm(mapFiltersForm);
+  }
+};
+
+export { onDataLoadFail, onDataLoadedSuccess, displayData };
