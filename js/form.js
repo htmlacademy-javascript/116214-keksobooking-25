@@ -16,6 +16,7 @@ const timein = adForm.querySelector('#timein');
 const timeout = adForm.querySelector('#timeout');
 const address = adForm.querySelector('#address');
 const adFormReset = adForm.querySelector('.ad-form__reset');
+const adFormSubmit = adForm.querySelector('[type=submit]');
 
 const avatarChooser = adForm.querySelector('.ad-form__field input');
 const avatarPrevieu = adForm.querySelector('.ad-form-header__preview');
@@ -272,6 +273,7 @@ const onSuccessAdForm = () => {
 };
 
 const onErrorAdForm = () => {
+  adFormSubmit.disabled = false;
   showMessage('error');
 };
 
@@ -281,6 +283,8 @@ adForm.addEventListener('submit', (evt) => {
 
   if (isValid) {
     const formData = new FormData(adForm);
+    adFormSubmit.disbled = true;
+
     sendData(
       formData,
       onSuccessAdForm,
