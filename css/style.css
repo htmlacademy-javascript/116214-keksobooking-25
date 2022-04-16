@@ -89,13 +89,6 @@ fieldset {
   background-color: #dddddd;
 }
 
-.map__error {
-  padding-top: 5px;
-  padding-bottom: 5px;
-  align-self: stretch;
-  text-align: center;
-  background-color: red;
-}
 
 /**
  * Фильтры объявления
@@ -437,10 +430,6 @@ fieldset {
 .ad-form__slider:not(#fake-id) .noUi-handle::after,
 .ad-form__slider:not(#fake-id) .noUi-handle::before {
   display: none;
-}
-
-.ad-form__error {
-  color: red;
 }
 
 .features legend {
