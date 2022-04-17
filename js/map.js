@@ -1,5 +1,6 @@
 import { generateCard } from './generateCards.js';
-import { setAddressFieldValue } from './form.js';
+import { setAddressFieldValue, filter } from './form.js';
+import { displayData } from './page.js';
 
 const SIMILAR_ANNOUNCEMENTS_COUNT = 10;
 
@@ -78,6 +79,8 @@ const resetMap = () => {
   markerGroup.clearLayers();
   mainMarker.setLatLng(mapCenterCoordinates);
   interactiveMap.setView(mapCenterCoordinates, 13);
+  filter.apply = false;
+  displayData();
 };
 
 export {
