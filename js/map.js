@@ -1,7 +1,7 @@
 import { generateCard } from './generate-cards.js';
 import { setAddressFieldValue } from './add-form.js';
 import { filter } from './filter-form.js';
-import { displayData, onDataLoadFail, onDataLoadSuccess } from './announcements.js';
+import { displayData, handleLoadDataError, handleLoadDataSuccess } from './announcements.js';
 import { activateForm } from './forms-activity-handler.js';
 import { addForm } from './add-form.js';
 import { getData } from './api.js';
@@ -87,14 +87,8 @@ mainMarker.on('moveend', (evt) => {
 
 tileLayer.once('load', () => {
   activateForm(addForm);
-  getData(onDataLoadSuccess, onDataLoadFail);
-});
+  getData(handleLoadDataSuccess, handleLoadDataError);
 
 mainMarker.addTo(interactiveMap);
 
-export {
-  mainMarker,
-  displayMarkers,
-  resetMap,
-  SIMILAR_ANNOUNCEMENTS_COUNT
-};
+export { mainMarker, displayMarkers, resetMap, SIMILAR_ANNOUNCEMENTS_COUNT };

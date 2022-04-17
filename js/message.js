@@ -7,7 +7,7 @@ const createMessage = (messageType) => {
   return messageTemplate.cloneNode(true);
 };
 
-const onEscapeDocument = (evt) => {
+const handleEscapeDocument = (evt) => {
   if (isEscape(evt.code)) {
     deleteMessage();
   }
@@ -15,13 +15,13 @@ const onEscapeDocument = (evt) => {
 
 function deleteMessage() {
   message.remove();
-  document.removeEventListener('keydown', onEscapeDocument);
+  document.removeEventListener('keydown', handleEscapeDocument);
 }
 
 const getMessage = (messageType) => {
   message = createMessage(messageType);
   message.addEventListener('click', () => deleteMessage());
-  document.addEventListener('keydown', onEscapeDocument);
+  document.addEventListener('keydown', handleEscapeDocument);
 
   if (messageType === 'error') {
     const messageCloseButton = message.querySelector(`.${messageType}__button`);

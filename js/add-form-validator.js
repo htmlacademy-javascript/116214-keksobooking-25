@@ -36,7 +36,7 @@ const getCapacityErrorMessage = () => {
   );
 };
 
-const renewAddFormValidator = () => {
+const updateAddFormValidator = () => {
   addFormValidator = new Pristine(addForm, PRISTINE_CONFIG, true);
 };
 
@@ -56,4 +56,4 @@ addFormValidator.addValidator(
   false
 );
 
-export { addFormValidator, renewAddFormValidator };
+export { addFormValidator, updateAddFormValidator };

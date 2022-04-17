@@ -4,7 +4,7 @@ import { getMessage } from './message.js';
 import { setOnChangePhotoInput, resetPreviews } from './photos-previewer.js';
 import { priceSlider, updateSliderMinPrice, PRICE_SLIDER_START_VALUE } from './price-slider.js';
 import { filterForm } from './filter-form.js';
-import { addFormValidator, renewAddFormValidator } from './add-form-validator.js';
+import { addFormValidator, updateAddFormValidator } from './add-form-validator.js';
 import { deactivateForm } from './forms-activity-handler.js';
 
 const MIN_PRICE_PER_NIGHT = {
@@ -54,12 +54,12 @@ const showMessage = (messageType) => {
   document.body.insertAdjacentElement('beforeend', message);
 };
 
-const onSuccessAddForm = () => {
+const handleSendAddFormSuccess = () => {
   resetApp();
   showMessage('success');
 };
 
-const onErrorAddForm = () => {
+const handleSendAddFormError = () => {
   submitButton.disabled = false;
   showMessage('error');
 };
@@ -67,7 +67,7 @@ const onErrorAddForm = () => {
 type.addEventListener('change', (evt) => {
   const housingType = evt.target.value;
   setMinPricePerNight(housingType);
-  renewAddFormValidator();
+  updateAddFormValidator();
   updateSliderMinPrice(getMinPrice(housingType));
 });
 
@@ -95,8 +95,8 @@ addForm.addEventListener('submit', (evt) => {
 
     sendData(
       formData,
-      onSuccessAddForm,
-      onErrorAddForm
+      handleSendAddFormSuccess,
+      handleSendAddFormError
     );
   }
 });

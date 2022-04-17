@@ -15,7 +15,7 @@ const showDataNotLoadedError = (errorMessage) => {
   mapElement.appendChild(errorElement);
 };
 
-const onDataLoadFail = (errorMessage) => {
+const handleLoadDataError = (errorMessage) => {
   showDataNotLoadedError(errorMessage);
 };
 
@@ -37,7 +37,7 @@ const displayData = () => {
   return true;
 };
 
-const onDataLoadSuccess = (data) => {
+const handleLoadDataSuccess = (data) => {
   announcmentsData = data;
 
   if (displayData()) {
@@ -45,4 +45,4 @@ const onDataLoadSuccess = (data) => {
   }
 };
 
-export { onDataLoadFail, onDataLoadSuccess, displayData };
+export { handleLoadDataError, handleLoadDataSuccess, displayData };
