@@ -86,7 +86,7 @@ mainMarker.on('moveend', (evt) => {
   setAddressFieldValue(markerCoordinates);
 });
 
-tileLayer.on('load', () => {
+tileLayer.once('load', () => {
   activateForm(addForm);
   getData(onDataLoadSuccess, onDataLoadFail);
 });
