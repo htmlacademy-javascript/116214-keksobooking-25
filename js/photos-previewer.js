@@ -1,4 +1,9 @@
+import { housingPreview } from './add-form.js';
+
+const avatar = document.querySelector('.ad-form-header__preview img');
+
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+const avatarDefaultSrc = avatar.src;
 
 const setOnChangePhotoInput = (photoChooser, photoPreview) => {
   photoChooser.addEventListener('change', () => {
@@ -28,4 +33,12 @@ const setOnChangePhotoInput = (photoChooser, photoPreview) => {
   });
 };
 
-export { setOnChangePhotoInput };
+const resetPreviews = () => {
+  avatar.src = avatarDefaultSrc;
+  const housingPreviewImage = housingPreview.querySelector('img');
+  if (housingPreviewImage) {
+    housingPreview.removeChild(housingPreviewImage);
+  }
+};
+
+export { setOnChangePhotoInput, resetPreviews };

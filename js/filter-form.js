@@ -1,7 +1,7 @@
 import { debounce } from './util.js';
 import { displayData } from './announcements.js';
 
-const mapFiltersForm = document.querySelector('.map__filters');
+const filterForm = document.querySelector('.map__filters');
 
 const RERENDER_DELAY = 500;
 
@@ -75,8 +75,8 @@ const onFilterChange = (evt) => {
   debounceHandler();
 };
 
-mapFiltersForm.addEventListener('change', (evt) => {
+filterForm.addEventListener('change', (evt) => {
   onFilterChange(evt);
 });
 
-export { mapFiltersForm, filter };
+export { filterForm, filter };
