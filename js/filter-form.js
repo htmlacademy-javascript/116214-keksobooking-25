@@ -1,5 +1,6 @@
 import { debounce } from './util.js';
 import { displayData } from './announcements.js';
+import { deactivateForm } from './forms-activity-handler.js';
 
 const RERENDER_DELAY = 500;
 
@@ -78,5 +79,7 @@ const onFilterChange = (evt) => {
 filterForm.addEventListener('change', (evt) => {
   onFilterChange(evt);
 });
+
+deactivateForm(filterForm);
 
 export { filterForm, filter };

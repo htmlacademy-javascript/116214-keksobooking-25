@@ -5,6 +5,7 @@ import { setOnChangePhotoInput, resetPreviews } from './photos-previewer.js';
 import { priceSlider, updateSliderMinPrice } from './price-slider.js';
 import { filterForm } from './filter-form.js';
 import { addFormValidator, renewAddFormValidator } from './add-form-validator.js';
+import { deactivateForm } from './forms-activity-handler.js';
 
 const minPricePerNight = {
   bungalow: 0,
@@ -105,6 +106,8 @@ addForm.addEventListener('submit', (evt) => {
 
 setOnChangePhotoInput(avatarChooser, avatarPreview);
 setOnChangePhotoInput(housingChooser, housingPreview);
+
+deactivateForm(addForm);
 
 export {
   addForm,

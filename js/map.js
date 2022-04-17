@@ -1,7 +1,10 @@
 import { generateCard } from './generate-cards.js';
 import { setAddressFieldValue } from './add-form.js';
 import { filter } from './filter-form.js';
-import { displayData } from './announcements.js';
+import { displayData, onDataLoadFail, onDataLoadSuccess } from './announcements.js';
+import { activateForm } from './forms-activity-handler.js';
+import { addForm } from './add-form.js';
+import { getData } from './api.js';
 
 const SIMILAR_ANNOUNCEMENTS_COUNT = 10;
 const MAP_DEFAULT_ZOOM = 13;
@@ -14,7 +17,7 @@ const mapCenterCoordinates = {
 const interactiveMap = L.map('map-canvas')
   .setView(mapCenterCoordinates, MAP_DEFAULT_ZOOM);
 
-L.tileLayer(
+const tileLayer = L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
   {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -83,10 +86,14 @@ mainMarker.on('moveend', (evt) => {
   setAddressFieldValue(markerCoordinates);
 });
 
+tileLayer.on('load', () => {
+  activateForm(addForm);
+  getData(onDataLoadSuccess, onDataLoadFail);
+});
+
 mainMarker.addTo(interactiveMap);
 
 export {
-  interactiveMap,
   mainMarker,
   displayMarkers,
   resetMap,
