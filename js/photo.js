@@ -16,6 +16,7 @@ const setOnChangePhotoInput = (photoChooser, photoPreview) => {
         image.src = URL.createObjectURL(file);
 
         photoPreview.style.display = 'flex';
+
         image.width = photoPreview.offsetWidth;
         image.style.alignItems = 'center';
         image.style.justifyContent = 'center';

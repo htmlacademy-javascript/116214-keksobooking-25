@@ -107,7 +107,6 @@ mapFiltersForm.addEventListener('change', (evt) => {
   onFilterChange(evt);
 });
 
-
 const capacityPerRoomNumber = {
   '1': [1],
   '2': [1, 2],

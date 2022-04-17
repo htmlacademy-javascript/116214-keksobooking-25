@@ -85,7 +85,6 @@ const resetMap = () => {
 
 export {
   interactiveMap,
-  mapCenterCoordinates,
   mainMarker,
   displayMarkers,
   resetMap,
