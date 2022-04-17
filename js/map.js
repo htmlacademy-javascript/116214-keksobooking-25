@@ -78,12 +78,12 @@ const resetMap = () => {
   displayData();
 };
 
-mainMarker.addTo(interactiveMap);
-
 mainMarker.on('moveend', (evt) => {
   const markerCoordinates = evt.target.getLatLng();
   setAddressFieldValue(markerCoordinates);
 });
+
+mainMarker.addTo(interactiveMap);
 
 export {
   interactiveMap,

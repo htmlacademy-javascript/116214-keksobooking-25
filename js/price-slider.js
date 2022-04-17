@@ -23,10 +23,6 @@ noUiSlider.create(priceSlider, {
   }
 });
 
-priceSlider.noUiSlider.on('update', () => {
-  price.value = priceSlider.noUiSlider.get();
-});
-
 const updateSliderMinPrice = (minPrice) => {
   priceSlider.noUiSlider.updateOptions({
     range: {
@@ -45,6 +41,10 @@ const disableSlider = (form, slider, status) => {
     }
   }
 };
+
+priceSlider.noUiSlider.on('update', () => {
+  price.value = priceSlider.noUiSlider.get();
+});
 
 export { updateSliderMinPrice, disableSlider, priceSlider };
 

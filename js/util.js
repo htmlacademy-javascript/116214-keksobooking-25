@@ -15,7 +15,6 @@ const populateElement = (element, content, mode) => {
     element.classList.add('hidden');
     return;
   }
-
   addContent[mode](element, content);
 };
 

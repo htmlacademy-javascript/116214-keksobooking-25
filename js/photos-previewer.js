@@ -13,6 +13,7 @@ const setOnChangePhotoInput = (photoChooser, photoPreview) => {
     const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
 
     if (matches) {
+
       if (photoPreview.hasChildNodes()) {
         const image = photoPreview.querySelector('img');
         image.src = URL.createObjectURL(file);
@@ -28,8 +29,8 @@ const setOnChangePhotoInput = (photoChooser, photoPreview) => {
 
         photoPreview.appendChild(image);
       }
-    }
 
+    }
   });
 };
 

@@ -17,13 +17,13 @@ const acceptPrice = (itemValue = undefined) => {
     return false;
   }
 
-  const PriceFilter = {
+  const priceFilter = {
     middle: itemValue >= PRICE_VALUE_LOW && itemValue <= PRICE_VALUE_HIGH,
     low: itemValue < PRICE_VALUE_LOW,
     high: itemValue > PRICE_VALUE_HIGH
   };
 
-  return PriceFilter[filterValue];
+  return priceFilter[filterValue];
 };
 
 const acceptRooms = (itemValue = undefined) => {

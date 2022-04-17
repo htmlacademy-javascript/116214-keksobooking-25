@@ -33,6 +33,10 @@ const getCapacityErrorMessage = () => {
   );
 };
 
+const renewAddFormValidator = () => {
+  addFormValidator = new Pristine(addForm, pristineConfig, true);
+};
+
 addFormValidator.addValidator(
   capacity,
   (value) => capacityPerRoomNumber[roomNumber.value].includes(parseInt(value, 10)),
@@ -48,9 +52,5 @@ addFormValidator.addValidator(
   1,
   false
 );
-
-const renewAddFormValidator = () => {
-  addFormValidator = new Pristine(addForm, pristineConfig, true);
-};
 
 export { addFormValidator, renewAddFormValidator };

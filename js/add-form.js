@@ -43,13 +43,6 @@ const setMinPricePerNight = (housingType) => {
   price.setAttribute('placeholder', minPrice);
 };
 
-type.addEventListener('change', (evt) => {
-  const housingType = evt.target.value;
-  setMinPricePerNight(housingType);
-  renewAddFormValidator();
-  updateSliderMinPrice(getMinPrice(housingType));
-});
-
 const resetApp = () => {
   addForm.reset();
   resetPreviews();
@@ -72,6 +65,13 @@ const onErrorAddForm = () => {
   submitButton.disabled = false;
   showMessage('error');
 };
+
+type.addEventListener('change', (evt) => {
+  const housingType = evt.target.value;
+  setMinPricePerNight(housingType);
+  renewAddFormValidator();
+  updateSliderMinPrice(getMinPrice(housingType));
+});
 
 timein.addEventListener('change', () => {
   timeout.value = timein.value;
