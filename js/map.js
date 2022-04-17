@@ -88,6 +88,7 @@ mainMarker.on('moveend', (evt) => {
 tileLayer.once('load', () => {
   activateForm(addForm);
   getData(handleLoadDataSuccess, handleLoadDataError);
+});
 
 mainMarker.addTo(interactiveMap);
 
