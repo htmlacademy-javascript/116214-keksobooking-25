@@ -6,8 +6,8 @@ import { activateForm } from './forms-activity-handler.js';
 import { addForm } from './add-form.js';
 import { getData } from './api.js';
 
-const SIMILAR_ANNOUNCEMENTS_COUNT = 10;
 const MAP_DEFAULT_ZOOM = 13;
+
 const MAP_CENTER_COORDINATES = {
   lat: 35.67920498464551,
   lng: 139.77100169861524
@@ -91,4 +91,4 @@ tileLayer.once('load', () => {
 
 mainMarker.addTo(interactiveMap);
 
-export { mainMarker, displayMarkers, resetMap, SIMILAR_ANNOUNCEMENTS_COUNT };
+export { mainMarker, displayMarkers, resetMap };
