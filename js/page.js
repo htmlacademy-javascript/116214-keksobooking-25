@@ -1,7 +1,8 @@
 import { filter, activateForm, mapFiltersForm } from './form.js';
 import { filterAnnouncements } from './filter.js';
 import { displayMarkers, SIMILAR_ANNOUNCEMENTS_COUNT } from './map.js';
-import { saveData, getData } from './localStorage.js';
+
+let announcmentsData = [];
 
 const showDataNotLoadedError = (errorMessage) => {
   const mapElement = document.querySelector('.map');
@@ -19,7 +20,7 @@ const filterData = (data) =>  filter.apply ? filterAnnouncements(data) : data;
 const limitData = (data) => data.slice(0, SIMILAR_ANNOUNCEMENTS_COUNT);
 
 const displayData = () => {
-  let announcements = getData('announcements');
+  let announcements = [...announcmentsData];
 
   if (! announcements) {
     showDataNotLoadedError('Данные отсутствуют. Попробуйте еще раз.');
@@ -34,7 +35,7 @@ const displayData = () => {
 };
 
 const onDataLoadedSuccess = (data) => {
-  saveData('announcements', data);
+  announcmentsData = data;
 
   if (displayData()) {
     activateForm(mapFiltersForm);
