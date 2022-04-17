@@ -1,9 +1,9 @@
+const ROOM_NUMBER_NOT_FOR_GUESTS = '100';
+
 const addForm = document.querySelector('.ad-form');
 const capacity = addForm.querySelector('#capacity');
 const title = addForm.querySelector('#title');
 const roomNumber = addForm.querySelector('#room_number');
-
-const ROOM_NUMBER_NOT_FOR_GUESTS = '100';
 
 const capacityPerRoomNumber = {
   '1': [1],
