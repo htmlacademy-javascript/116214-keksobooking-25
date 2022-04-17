@@ -19,12 +19,15 @@ const adFormReset = adForm.querySelector('.ad-form__reset');
 const adFormSubmit = adForm.querySelector('[type=submit]');
 
 const avatarChooser = adForm.querySelector('.ad-form__field input');
-const avatarPrevieu = adForm.querySelector('.ad-form-header__preview');
-const housingChooser = adForm.querySelector('.ad-form__upload input');
-const housingPrevieu = adForm.querySelector('.ad-form__photo');
+const avatarPreview = adForm.querySelector('.ad-form-header__preview');
+const avatar = adForm.querySelector('.ad-form-header__preview img');
+const avatarDefaultSrc = avatar.src;
 
-setOnChangePhotoInput(avatarChooser, avatarPrevieu);
-setOnChangePhotoInput(housingChooser, housingPrevieu);
+const housingChooser = adForm.querySelector('.ad-form__upload input');
+const housingPreview = adForm.querySelector('.ad-form__photo');
+
+setOnChangePhotoInput(avatarChooser, avatarPreview);
+setOnChangePhotoInput(housingChooser, housingPreview);
 
 const mapFiltersForm = document.querySelector('.map__filters');
 
@@ -260,8 +263,17 @@ price.addEventListener('change', (evt) => {
   priceSlider.noUiSlider.set(evt.target.value);
 });
 
+const resetPreviews = () => {
+  avatar.src = avatarDefaultSrc;
+  const housingPreviewImage = housingPreview.querySelector('img');
+  if (housingPreviewImage) {
+    housingPreview.removeChild(housingPreviewImage);
+  }
+};
+
 const resetApp = () => {
   adForm.reset();
+  resetPreviews();
   priceSlider.noUiSlider.set(5000);
   mapFiltersForm.reset();
   resetMap();
