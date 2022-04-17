@@ -36,7 +36,7 @@ const generatListItemsByTemplate = (template, data, dataName) => {
 
   data.forEach((value) => {
     const item = template.cloneNode(true);
-    item[dataName] = value;
+    item[dataName] = String(value);
     fragment.appendChild(item);
   });
 
