@@ -1,7 +1,13 @@
-import { generateCard } from './generateCards.js';
-import { setAddressFieldValue } from './form.js';
+import { generateCard } from './generate-cards.js';
+import { setAddressFieldValue } from './add-form.js';
+import { filter } from './filter-form.js';
+import { displayData, onDataLoadFail, onDataLoadSuccess } from './announcements.js';
+import { activateForm } from './forms-activity-handler.js';
+import { addForm } from './add-form.js';
+import { getData } from './api.js';
 
 const SIMILAR_ANNOUNCEMENTS_COUNT = 10;
+const MAP_DEFAULT_ZOOM = 13;
 
 const mapCenterCoordinates = {
   lat: 35.67920498464551,
@@ -9,9 +15,9 @@ const mapCenterCoordinates = {
 };
 
 const interactiveMap = L.map('map-canvas')
-  .setView(mapCenterCoordinates, 13);
+  .setView(mapCenterCoordinates, MAP_DEFAULT_ZOOM);
 
-L.tileLayer(
+const tileLayer = L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
   {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -31,13 +37,6 @@ const mainMarker = L.marker(
     draggable: true
   }
 );
-
-mainMarker.addTo(interactiveMap);
-
-mainMarker.on('moveend', (evt) => {
-  const markerCoordinates = evt.target.getLatLng();
-  setAddressFieldValue(markerCoordinates);
-});
 
 const ordinaryPinIcon = L.icon({
   iconUrl: './img/pin.svg',
@@ -77,12 +76,24 @@ const displayMarkers = (announcments) => {
 const resetMap = () => {
   markerGroup.clearLayers();
   mainMarker.setLatLng(mapCenterCoordinates);
-  interactiveMap.setView(mapCenterCoordinates, 13);
+  interactiveMap.setView(mapCenterCoordinates, MAP_DEFAULT_ZOOM);
+  filter.apply = false;
+  displayData();
 };
 
+mainMarker.on('moveend', (evt) => {
+  const markerCoordinates = evt.target.getLatLng();
+  setAddressFieldValue(markerCoordinates);
+});
+
+tileLayer.on('load', () => {
+  activateForm(addForm);
+  getData(onDataLoadSuccess, onDataLoadFail);
+});
+
+mainMarker.addTo(interactiveMap);
+
 export {
-  interactiveMap,
-  mapCenterCoordinates,
   mainMarker,
   displayMarkers,
   resetMap,

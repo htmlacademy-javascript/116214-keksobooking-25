@@ -1053,3 +1053,19 @@ fieldset {
 .hidden {
   display: none;
 }
+
+/* additional styles */
+.ad-form__error {
+  display: inline-block;
+  padding-top: 3px;
+  font-size: smaller;
+  color: red;
+}
+
+.map__error {
+  align-self: stretch;
+  padding: 3px 0;
+  color: white;
+  background-color: red;
+  text-align: center;
+}

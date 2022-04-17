@@ -9,7 +9,7 @@ import {
 
 const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
 
-const RealtyTypesDictionary = {
+const realtyTypesDictionary = {
   flat: 'Квартира',
   bungalow: 'Бунгало',
   house: 'Дом',
@@ -31,7 +31,7 @@ const generateCard = (author, offer) => {
   populateElement(priceItem, formatPrice(price), 'html');
 
   const realtyTypeItem = card.querySelector('.popup__type');
-  populateElement(realtyTypeItem, RealtyTypesDictionary[type], 'text');
+  populateElement(realtyTypeItem, realtyTypesDictionary[type], 'text');
 
   const capacityItem = card.querySelector('.popup__text--capacity');
   populateElement(capacityItem, formatCapacity(rooms, guests), 'text');

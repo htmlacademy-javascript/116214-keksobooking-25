@@ -1,4 +1,9 @@
+import { housingPreview } from './add-form.js';
+
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+
+const avatar = document.querySelector('.ad-form-header__preview img');
+const avatarDefaultSrc = avatar.src;
 
 const setOnChangePhotoInput = (photoChooser, photoPreview) => {
   photoChooser.addEventListener('change', () => {
@@ -16,6 +21,7 @@ const setOnChangePhotoInput = (photoChooser, photoPreview) => {
         image.src = URL.createObjectURL(file);
 
         photoPreview.style.display = 'flex';
+
         image.width = photoPreview.offsetWidth;
         image.style.alignItems = 'center';
         image.style.justifyContent = 'center';
@@ -27,4 +33,12 @@ const setOnChangePhotoInput = (photoChooser, photoPreview) => {
   });
 };
 
-export { setOnChangePhotoInput };
+const resetPreviews = () => {
+  avatar.src = avatarDefaultSrc;
+  const housingPreviewImage = housingPreview.querySelector('img');
+  if (housingPreviewImage) {
+    housingPreview.removeChild(housingPreviewImage);
+  }
+};
+
+export { setOnChangePhotoInput, resetPreviews };

@@ -1,4 +1,7 @@
-import { filter } from './form.js';
+import { filter } from './filter-form.js';
+
+const PRICE_VALUE_LOW = 10000;
+const PRICE_VALUE_HIGH = 50000;
 
 const acceptType = (itemValue = undefined) => {
   const filterValue = filter.type;
@@ -13,14 +16,14 @@ const acceptPrice = (itemValue = undefined) => {
   if (! filterValue) {
     return false;
   }
-  switch(filterValue) {
-    case 'middle':
-      return itemValue >= 10000 && itemValue <= 50000;
-    case 'low':
-      return itemValue < 10000;
-    case 'high':
-      return itemValue > 50000;
-  }
+
+  const priceFilter = {
+    middle: itemValue >= PRICE_VALUE_LOW && itemValue <= PRICE_VALUE_HIGH,
+    low: itemValue < PRICE_VALUE_LOW,
+    high: itemValue > PRICE_VALUE_HIGH
+  };
+
+  return priceFilter[filterValue];
 };
 
 const acceptRooms = (itemValue = undefined) => {

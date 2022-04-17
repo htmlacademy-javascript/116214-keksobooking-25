@@ -15,7 +15,6 @@ const populateElement = (element, content, mode) => {
     element.classList.add('hidden');
     return;
   }
-
   addContent[mode](element, content);
 };
 
@@ -34,11 +33,13 @@ const generatListItemsByTemplate = (template, data, dataName) => {
   }
 
   const fragment = document.createDocumentFragment();
+
   data.forEach((value) => {
     const item = template.cloneNode(true);
     item[dataName] = value;
     fragment.appendChild(item);
   });
+
   return fragment;
 };
 

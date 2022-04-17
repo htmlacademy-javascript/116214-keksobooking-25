@@ -1,13 +1,17 @@
-import { filter, activateForm, mapFiltersForm } from './form.js';
-import { filterAnnouncements } from './filter.js';
+import { activateForm } from './forms-activity-handler.js';
+import { filterForm, filter } from './filter-form.js';
+import { filterAnnouncements } from './announcements-filter.js';
 import { displayMarkers, SIMILAR_ANNOUNCEMENTS_COUNT } from './map.js';
-import { saveData, getData } from './localStorage.js';
+
+let announcmentsData = [];
 
 const showDataNotLoadedError = (errorMessage) => {
   const mapElement = document.querySelector('.map');
   const errorElement = document.createElement('div');
+
   errorElement.classList.add('map__error');
   errorElement.textContent = errorMessage;
+
   mapElement.appendChild(errorElement);
 };
 
@@ -19,7 +23,7 @@ const filterData = (data) =>  filter.apply ? filterAnnouncements(data) : data;
 const limitData = (data) => data.slice(0, SIMILAR_ANNOUNCEMENTS_COUNT);
 
 const displayData = () => {
-  let announcements = getData('announcements');
+  let announcements = [...announcmentsData];
 
   if (! announcements) {
     showDataNotLoadedError('Данные отсутствуют. Попробуйте еще раз.');
@@ -33,12 +37,12 @@ const displayData = () => {
   return true;
 };
 
-const onDataLoadedSuccess = (data) => {
-  saveData('announcements', data);
+const onDataLoadSuccess = (data) => {
+  announcmentsData = data;
 
   if (displayData()) {
-    activateForm(mapFiltersForm);
+    activateForm(filterForm);
   }
 };
 
-export { onDataLoadFail, onDataLoadedSuccess, displayData };
+export { onDataLoadFail, onDataLoadSuccess, displayData };
