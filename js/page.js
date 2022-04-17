@@ -36,7 +36,7 @@ const displayData = () => {
   return true;
 };
 
-const onDataLoadedSuccess = (data) => {
+const onDataLoadSuccess = (data) => {
   announcmentsData = data;
 
   if (displayData()) {
@@ -44,4 +44,4 @@ const onDataLoadedSuccess = (data) => {
   }
 };
 
-export { onDataLoadFail, onDataLoadedSuccess, displayData };
+export { onDataLoadFail, onDataLoadSuccess, displayData };
