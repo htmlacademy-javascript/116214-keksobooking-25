@@ -1061,3 +1061,11 @@ fieldset {
   font-size: smaller;
   color: red;
 }
+
+.map__error {
+  align-self: stretch;
+  padding: 3px 0;
+  color: white;
+  background-color: red;
+  text-align: center;
+}
