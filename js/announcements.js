@@ -1,6 +1,6 @@
 import { activateForm } from './forms-activity-handler.js';
 import { filterForm, filter } from './filter-form.js';
-import { filterAnnouncements } from './filter.js';
+import { filterAnnouncements } from './announcements-filter.js';
 import { displayMarkers, SIMILAR_ANNOUNCEMENTS_COUNT } from './map.js';
 
 let announcmentsData = [];
