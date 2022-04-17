@@ -35,13 +35,6 @@ const mainMarker = L.marker(
   }
 );
 
-mainMarker.addTo(interactiveMap);
-
-mainMarker.on('moveend', (evt) => {
-  const markerCoordinates = evt.target.getLatLng();
-  setAddressFieldValue(markerCoordinates);
-});
-
 const ordinaryPinIcon = L.icon({
   iconUrl: './img/pin.svg',
   iconSize: [40, 40],
@@ -84,6 +77,13 @@ const resetMap = () => {
   filter.apply = false;
   displayData();
 };
+
+mainMarker.addTo(interactiveMap);
+
+mainMarker.on('moveend', (evt) => {
+  const markerCoordinates = evt.target.getLatLng();
+  setAddressFieldValue(markerCoordinates);
+});
 
 export {
   interactiveMap,
