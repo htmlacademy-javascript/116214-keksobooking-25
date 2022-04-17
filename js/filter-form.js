@@ -1,9 +1,9 @@
 import { debounce } from './util.js';
 import { displayData } from './announcements.js';
 
-const filterForm = document.querySelector('.map__filters');
-
 const RERENDER_DELAY = 500;
+
+const filterForm = document.querySelector('.map__filters');
 
 let filter = {
   apply: false,
