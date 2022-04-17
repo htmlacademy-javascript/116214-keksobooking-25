@@ -5,6 +5,39 @@ import { displayData } from './page.js';
 import { debounce } from './util.js';
 import { setOnChangePhotoInput } from './photo.js';
 
+const RERENDER_DELAY = 500;
+
+const capacityPerRoomNumber = {
+  '1': [1],
+  '2': [1, 2],
+  '3': [1, 2, 3],
+  '100': [0]
+};
+
+const minPricePerNight = {
+  bungalow: 0,
+  flat: 1000,
+  hotel: 3000,
+  house: 5000,
+  palace: 10000
+};
+
+const ROOM_NUMBER_NOT_FOR_GUESTS = '100';
+
+const PRICE_SLIDER_MIN_VALUE = 1000;
+const PRICE_SLIDER_START_VALUE = 5000;
+const PRICE_SLIDER_MAX_VALUE = 100000;
+
+let filter = {
+  apply: false,
+  rank: 0,
+  type: 'any',
+  price: 'any',
+  rooms: 'any',
+  guests: 'any',
+  features: []
+};
+
 // Data
 const adForm = document.querySelector('.ad-form');
 const title = adForm.querySelector('#title');
@@ -27,20 +60,10 @@ const avatarDefaultSrc = avatar.src;
 const housingChooser = adForm.querySelector('.ad-form__upload input');
 const housingPreview = adForm.querySelector('.ad-form__photo');
 
-setOnChangePhotoInput(avatarChooser, avatarPreview);
-setOnChangePhotoInput(housingChooser, housingPreview);
-
 const mapFiltersForm = document.querySelector('.map__filters');
 
-let filter = {
-  apply: false,
-  rank: 0,
-  type: 'any',
-  price: 'any',
-  rooms: 'any',
-  guests: 'any',
-  features: []
-};
+setOnChangePhotoInput(avatarChooser, avatarPreview);
+setOnChangePhotoInput(housingChooser, housingPreview);
 
 const setFilter = (evt) => {
   let rank = 0;
@@ -92,7 +115,6 @@ const setFilter = (evt) => {
   filter.apply = filter.rank > 0;
 };
 
-const RERENDER_DELAY = 500;
 const debounceHandler = debounce(
   () => displayData(),
   RERENDER_DELAY
@@ -107,24 +129,8 @@ mapFiltersForm.addEventListener('change', (evt) => {
   onFilterChange(evt);
 });
 
-const capacityPerRoomNumber = {
-  '1': [1],
-  '2': [1, 2],
-  '3': [1, 2, 3],
-  '100': [0]
-};
-
 // Utils
-const getMinPrice = (housingType) => {
-  const minPricesPerNightByType = {
-    bungalow: 0,
-    flat: 1000,
-    hotel: 3000,
-    house: 5000,
-    palace: 10000
-  };
-  return minPricesPerNightByType[housingType];
-};
+const getMinPrice = (housingType) =>  minPricePerNight[housingType];
 
 const setMinPricePerNight = (housingType) => {
   const minPrice = getMinPrice(housingType);
@@ -137,7 +143,7 @@ const getCapacityErrorMessage = () => {
   const possibleGuestCounts = capacityPerRoomNumber[roomNumber.value];
   const maxGuestCount = possibleGuestCounts[possibleGuestCounts.length - 1];
   return (
-    roomNumber.value === '100' ?
+    roomNumber.value === ROOM_NUMBER_NOT_FOR_GUESTS ?
       'Не для гостей' :
       `Не более ${maxGuestCount} ${maxGuestCount === 1 ? 'гостья' : 'гостей'}`
   );
@@ -185,10 +191,10 @@ const setAddressFieldValue = (coordinates) => {
 // Nouislider
 noUiSlider.create(priceSlider, {
   range: {
-    min: 1000,
-    max: 100000
+    min: PRICE_SLIDER_MIN_VALUE,
+    max: PRICE_SLIDER_MAX_VALUE
   },
-  start: 5000,
+  start: PRICE_SLIDER_START_VALUE,
   connect: 'lower',
   format: {
     to: function(value) {
@@ -204,7 +210,7 @@ const updateSliderMinPrice = (minPrice) => {
   priceSlider.noUiSlider.updateOptions({
     range: {
       min: minPrice,
-      max: 100000
+      max: PRICE_SLIDER_MAX_VALUE
     },
   });
 };
@@ -214,7 +220,7 @@ priceSlider.noUiSlider.on('update', () => {
 });
 
 // Pristine
-const PristineConfig = {
+const pristineConfig = {
   classTo: 'ad-form__element',
   errorClass: 'ad-form__element--invalid',
   successClass: 'ad-form__element--valid',
@@ -223,7 +229,7 @@ const PristineConfig = {
   errorTextClass: 'ad-form__error'
 };
 
-let adFormPristine = new Pristine(adForm, PristineConfig, true);
+let adFormPristine = new Pristine(adForm, pristineConfig, true);
 
 adFormPristine.addValidator(
   capacity,
@@ -245,7 +251,7 @@ adFormPristine.addValidator(
 type.addEventListener('change', (evt) => {
   const housingType = evt.target.value;
   setMinPricePerNight(housingType);
-  adFormPristine = new Pristine(adForm, PristineConfig, true);
+  adFormPristine = new Pristine(adForm, pristineConfig, true);
   updateSliderMinPrice(getMinPrice(housingType));
 });
 

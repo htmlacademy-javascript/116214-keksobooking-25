@@ -3,6 +3,7 @@ import { setAddressFieldValue, filter } from './form.js';
 import { displayData } from './page.js';
 
 const SIMILAR_ANNOUNCEMENTS_COUNT = 10;
+const MAP_DEFAULT_ZOOM = 13;
 
 const mapCenterCoordinates = {
   lat: 35.67920498464551,
@@ -10,7 +11,7 @@ const mapCenterCoordinates = {
 };
 
 const interactiveMap = L.map('map-canvas')
-  .setView(mapCenterCoordinates, 13);
+  .setView(mapCenterCoordinates, MAP_DEFAULT_ZOOM);
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -78,7 +79,7 @@ const displayMarkers = (announcments) => {
 const resetMap = () => {
   markerGroup.clearLayers();
   mainMarker.setLatLng(mapCenterCoordinates);
-  interactiveMap.setView(mapCenterCoordinates, 13);
+  interactiveMap.setView(mapCenterCoordinates, MAP_DEFAULT_ZOOM);
   filter.apply = false;
   displayData();
 };

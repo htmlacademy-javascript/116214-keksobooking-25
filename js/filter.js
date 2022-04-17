@@ -1,5 +1,8 @@
 import { filter } from './form.js';
 
+const PRICE_VALUE_LOW = 10000;
+const PRICE_VALUE_HIGH = 50000;
+
 const acceptType = (itemValue = undefined) => {
   const filterValue = filter.type;
   if (! filterValue) {
@@ -15,9 +18,9 @@ const acceptPrice = (itemValue = undefined) => {
   }
 
   const PriceFilter = {
-    middle: itemValue >= 10000 && itemValue <= 50000,
-    low: itemValue < 10000,
-    high: itemValue > 50000
+    middle: itemValue >= PRICE_VALUE_LOW && itemValue <= PRICE_VALUE_HIGH,
+    low: itemValue < PRICE_VALUE_LOW,
+    high: itemValue > PRICE_VALUE_HIGH
   };
 
   return PriceFilter[filterValue];
