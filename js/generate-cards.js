@@ -7,15 +7,15 @@ import {
   generatListItemsByTemplate
 } from './util.js';
 
-const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
-
-const realtyTypesDictionary = {
+const REALTY_TYPES = {
   flat: 'Квартира',
   bungalow: 'Бунгало',
   house: 'Дом',
   palace: 'Дворец',
   hotel: 'Отель'
 };
+
+const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
 
 const generateCard = (author, offer) => {
   const {title, address, price, type, rooms, guests, checkin, checkout, features, description, photos} = offer;
@@ -31,7 +31,7 @@ const generateCard = (author, offer) => {
   populateElement(priceItem, formatPrice(price), 'html');
 
   const realtyTypeItem = card.querySelector('.popup__type');
-  populateElement(realtyTypeItem, realtyTypesDictionary[type], 'text');
+  populateElement(realtyTypeItem, REALTY_TYPES[type], 'text');
 
   const capacityItem = card.querySelector('.popup__text--capacity');
   populateElement(capacityItem, formatCapacity(rooms, guests), 'text');

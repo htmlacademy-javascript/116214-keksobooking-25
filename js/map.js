@@ -8,14 +8,13 @@ import { getData } from './api.js';
 
 const SIMILAR_ANNOUNCEMENTS_COUNT = 10;
 const MAP_DEFAULT_ZOOM = 13;
-
-const mapCenterCoordinates = {
+const MAP_CENTER_COORDINATES = {
   lat: 35.67920498464551,
   lng: 139.77100169861524
 };
 
 const interactiveMap = L.map('map-canvas')
-  .setView(mapCenterCoordinates, MAP_DEFAULT_ZOOM);
+  .setView(MAP_CENTER_COORDINATES, MAP_DEFAULT_ZOOM);
 
 const tileLayer = L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -31,7 +30,7 @@ const mainPinIcon = L.icon({
 });
 
 const mainMarker = L.marker(
-  mapCenterCoordinates,
+  MAP_CENTER_COORDINATES,
   {
     icon: mainPinIcon,
     draggable: true
@@ -75,8 +74,8 @@ const displayMarkers = (announcments) => {
 
 const resetMap = () => {
   markerGroup.clearLayers();
-  mainMarker.setLatLng(mapCenterCoordinates);
-  interactiveMap.setView(mapCenterCoordinates, MAP_DEFAULT_ZOOM);
+  mainMarker.setLatLng(MAP_CENTER_COORDINATES);
+  interactiveMap.setView(MAP_CENTER_COORDINATES, MAP_DEFAULT_ZOOM);
   filter.apply = false;
   displayData();
 };

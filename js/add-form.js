@@ -7,7 +7,7 @@ import { filterForm } from './filter-form.js';
 import { addFormValidator, renewAddFormValidator } from './add-form-validator.js';
 import { deactivateForm } from './forms-activity-handler.js';
 
-const minPricePerNight = {
+const MIN_PRICE_PER_NIGHT = {
   bungalow: 0,
   flat: 1000,
   hotel: 3000,
@@ -35,7 +35,7 @@ const setAddressFieldValue = (coordinates) => {
   address.value = `${coordinates.lat.toFixed(5)}, ${coordinates.lng.toFixed(5)}`;
 };
 
-const getMinPrice = (housingType) =>  minPricePerNight[housingType];
+const getMinPrice = (housingType) =>  MIN_PRICE_PER_NIGHT[housingType];
 
 const setMinPricePerNight = (housingType) => {
   const minPrice = getMinPrice(housingType);
