@@ -7,6 +7,7 @@ import { setOnChangePhotoInput } from './photo.js';
 
 // Data
 const adForm = document.querySelector('.ad-form');
+const title = adForm.querySelector('#title');
 const type = adForm.querySelector('#type');
 const price = adForm.querySelector('#price');
 const priceSlider = adForm.querySelector('.ad-form__slider');
@@ -223,22 +224,20 @@ const pristineConfig = {
   errorTextClass: 'ad-form__error'
 };
 
-Pristine.addValidator(
-  'title-range',
-  (value, minlength, maxlength) => parseInt(minlength, 10) <= value.length && value.length <= parseInt(maxlength, 10),
-  // Here Pristine requires ordinary quotes for strin
-  // eslint-disable-next-line
-  'От ${1} до ${2} символов',
-  1,
-  false
-);
-
 let adFormPristine = new Pristine(adForm, pristineConfig, true);
 
 adFormPristine.addValidator(
   capacity,
   (value) => capacityPerRoomNumber[roomNumber.value].includes(parseInt(value, 10)),
   getCapacityErrorMessage,
+  1,
+  false
+);
+
+adFormPristine.addValidator(
+  title,
+  (value) => value.length >= 30 && value.length <= 100,
+  'От 30 до 100 символов',
   1,
   false
 );
