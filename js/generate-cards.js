@@ -4,7 +4,7 @@ import {
   formatCapacity,
   formatTime,
   conformLIstToData,
-  generatListItemsByTemplate
+  generateListItemsByTemplate
 } from './util.js';
 
 const REALTY_TYPES = {
@@ -52,7 +52,7 @@ const generateCard = (author, offer) => {
 
   const photoItemsContainer = card.querySelector('.popup__photos');
   const photoTemplate = photoItemsContainer.querySelector('.popup__photo');
-  const photoItemsList= generatListItemsByTemplate(photoTemplate, photos, 'src');
+  const photoItemsList= generateListItemsByTemplate(photoTemplate, photos, 'src');
   populateElement(photoItemsContainer, photoItemsList, 'insertAsNode');
 
   const avatarItem = card.querySelector('.popup__avatar');
