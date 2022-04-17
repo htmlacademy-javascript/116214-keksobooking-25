@@ -1,8 +1,8 @@
 import { housingPreview } from './add-form.js';
 
-const avatar = document.querySelector('.ad-form-header__preview img');
-
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+
+const avatar = document.querySelector('.ad-form-header__preview img');
 const avatarDefaultSrc = avatar.src;
 
 const setOnChangePhotoInput = (photoChooser, photoPreview) => {
@@ -13,7 +13,6 @@ const setOnChangePhotoInput = (photoChooser, photoPreview) => {
     const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
 
     if (matches) {
-
       if (photoPreview.hasChildNodes()) {
         const image = photoPreview.querySelector('img');
         image.src = URL.createObjectURL(file);
@@ -29,8 +28,8 @@ const setOnChangePhotoInput = (photoChooser, photoPreview) => {
 
         photoPreview.appendChild(image);
       }
-
     }
+
   });
 };
 

@@ -1,10 +1,10 @@
-const addForm = document.querySelector('.ad-form');
-const priceSlider = addForm.querySelector('.ad-form__slider');
-const price = addForm.querySelector('#price');
-
 const PRICE_SLIDER_MIN_VALUE = 1000;
 const PRICE_SLIDER_START_VALUE = 5000;
 const PRICE_SLIDER_MAX_VALUE = 100000;
+
+const addForm = document.querySelector('.ad-form');
+const priceSlider = addForm.querySelector('.ad-form__slider');
+const price = addForm.querySelector('#price');
 
 noUiSlider.create(priceSlider, {
   range: {
