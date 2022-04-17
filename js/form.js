@@ -215,7 +215,7 @@ priceSlider.noUiSlider.on('update', () => {
 });
 
 // Pristine
-const pristineConfig = {
+const PristineConfig = {
   classTo: 'ad-form__element',
   errorClass: 'ad-form__element--invalid',
   successClass: 'ad-form__element--valid',
@@ -224,7 +224,7 @@ const pristineConfig = {
   errorTextClass: 'ad-form__error'
 };
 
-let adFormPristine = new Pristine(adForm, pristineConfig, true);
+let adFormPristine = new Pristine(adForm, PristineConfig, true);
 
 adFormPristine.addValidator(
   capacity,
@@ -246,7 +246,7 @@ adFormPristine.addValidator(
 type.addEventListener('change', (evt) => {
   const housingType = evt.target.value;
   setMinPricePerNight(housingType);
-  adFormPristine = new Pristine(adForm, pristineConfig, true);
+  adFormPristine = new Pristine(adForm, PristineConfig, true);
   updateSliderMinPrice(getMinPrice(housingType));
 });
 
