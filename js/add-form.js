@@ -16,11 +16,8 @@ const MIN_PRICE_PER_NIGHT = {
 };
 
 const addForm = document.querySelector('.ad-form');
-const title = addForm.querySelector('#title');
 const type = addForm.querySelector('#type');
 const price = addForm.querySelector('#price');
-const roomNumber = addForm.querySelector('#room_number');
-const capacity = addForm.querySelector('#capacity');
 const timein = addForm.querySelector('#timein');
 const timeout = addForm.querySelector('#timeout');
 const address = addForm.querySelector('#address');
@@ -112,9 +109,6 @@ deactivateForm(addForm);
 export {
   addForm,
   price,
-  capacity,
-  title,
-  roomNumber,
   housingPreview,
   setAddressFieldValue,
   setMinPricePerNight
