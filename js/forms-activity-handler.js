@@ -1,14 +1,11 @@
 import { priceSlider, disableSlider } from './price-slider.js';
 
 const disableElements = (elements, status) => {
-  const elems = Array.from(elements);
-  for (let i=0; i<elems.length; i++) {
-    const item = elems[i];
-    const tagName = item.tagName;
-    if (tagName === 'FIELDSET' || ! item.closest('fieldset')) {
+  Array.from(elements).forEach((item) => {
+    if (item.tagName === 'FIELDSET' || ! item.closest('fieldset')) {
       item.disabled = status;
     }
-  }
+  });
 };
 
 const disableFormElement = (form, status) => {
