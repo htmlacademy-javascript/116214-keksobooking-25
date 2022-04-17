@@ -1,4 +1,5 @@
-import { filter, activateForm, mapFiltersForm } from './form.js';
+import { activateForm } from './add-form.js';
+import { mapFiltersForm, filter } from './filter-form.js';
 import { filterAnnouncements } from './filter.js';
 import { displayMarkers, SIMILAR_ANNOUNCEMENTS_COUNT } from './map.js';
 

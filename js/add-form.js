@@ -1,11 +1,7 @@
 import { sendData } from './api.js';
 import { resetMap } from './map.js';
 import { getMessage } from './message.js';
-import { displayData } from './page.js';
-import { debounce } from './util.js';
 import { setOnChangePhotoInput } from './photo.js';
-
-const RERENDER_DELAY = 500;
 
 const capacityPerRoomNumber = {
   '1': [1],
@@ -27,16 +23,6 @@ const ROOM_NUMBER_NOT_FOR_GUESTS = '100';
 const PRICE_SLIDER_MIN_VALUE = 1000;
 const PRICE_SLIDER_START_VALUE = 5000;
 const PRICE_SLIDER_MAX_VALUE = 100000;
-
-let filter = {
-  apply: false,
-  rank: 0,
-  type: 'any',
-  price: 'any',
-  rooms: 'any',
-  guests: 'any',
-  features: []
-};
 
 // Data
 const adForm = document.querySelector('.ad-form');
@@ -60,74 +46,8 @@ const avatarDefaultSrc = avatar.src;
 const housingChooser = adForm.querySelector('.ad-form__upload input');
 const housingPreview = adForm.querySelector('.ad-form__photo');
 
-const mapFiltersForm = document.querySelector('.map__filters');
-
 setOnChangePhotoInput(avatarChooser, avatarPreview);
 setOnChangePhotoInput(housingChooser, housingPreview);
-
-const setFilter = (evt) => {
-  let rank = 0;
-
-  const filterName = evt.target.name.split('-')[1];
-  const filterValue = evt.target.value;
-
-  if (filterName in filter) {
-    filter = Object.assign(filter, {[filterName]: filterValue});
-  } else {
-    if (evt.target.checked) {
-      filter.features.push(filterValue);
-    } else {
-      filter.features.splice(filter.features.indexOf(filterValue), 1);
-    }
-  }
-
-  if (filter.type !== 'any') {
-    rank += 1;
-  }
-  if (filter.price !== 'any') {
-    rank += 1;
-  }
-  if (filter.rooms !== 'any') {
-    rank += 1;
-  }
-  if (filter.guests !== 'any') {
-    rank += 1;
-  }
-  if (filter.features.includes('wifi')) {
-    rank += 1;
-  }
-  if (filter.features.includes('dishwasher')) {
-    rank += 1;
-  }
-  if (filter.features.includes('parking')) {
-    rank += 1;
-  }
-  if (filter.features.includes('washer')) {
-    rank += 1;
-  }
-  if (filter.features.includes('elevator')) {
-    rank += 1;
-  }
-  if (filter.features.includes('conditioner')) {
-    rank += 1;
-  }
-  filter.rank = rank;
-  filter.apply = filter.rank > 0;
-};
-
-const debounceHandler = debounce(
-  () => displayData(),
-  RERENDER_DELAY
-);
-
-const onFilterChange = (evt) => {
-  setFilter(evt);
-  debounceHandler();
-};
-
-mapFiltersForm.addEventListener('change', (evt) => {
-  onFilterChange(evt);
-});
 
 // Utils
 const getMinPrice = (housingType) =>  minPricePerNight[housingType];
@@ -318,9 +238,7 @@ adForm.addEventListener('submit', (evt) => {
 
 export {
   adForm,
-  mapFiltersForm,
   activateForm,
   deactivateForm,
-  setAddressFieldValue,
-  filter
+  setAddressFieldValue
 };

@@ -1,6 +1,7 @@
 import { generateCard } from './generate-cards.js';
-import { setAddressFieldValue, filter } from './form.js';
-import { displayData } from './page.js';
+import { setAddressFieldValue } from './add-form.js';
+import { filter } from './filter-form.js';
+import { displayData } from './announcements.js';
 
 const SIMILAR_ANNOUNCEMENTS_COUNT = 10;
 const MAP_DEFAULT_ZOOM = 13;

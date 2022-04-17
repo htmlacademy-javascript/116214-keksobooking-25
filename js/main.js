@@ -1,9 +1,10 @@
 import './map.js';
 import {interactiveMap} from './map.js';
-import './form.js';
-import { activateForm, deactivateForm, adForm, mapFiltersForm } from './form.js';
+import './add-form.js';
+import { activateForm, deactivateForm, adForm } from './add-form.js';
+import { mapFiltersForm } from './filter-form.js';
 import { getData } from './api.js';
-import { onDataLoadFail, onDataLoadSuccess } from './page.js';
+import { onDataLoadFail, onDataLoadSuccess } from './announcements.js';
 
 deactivateForm(adForm);
 deactivateForm(mapFiltersForm);

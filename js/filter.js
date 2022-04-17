@@ -1,4 +1,4 @@
-import { filter } from './form.js';
+import { filter } from './filter-form.js';
 
 const PRICE_VALUE_LOW = 10000;
 const PRICE_VALUE_HIGH = 50000;
