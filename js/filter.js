@@ -13,14 +13,14 @@ const acceptPrice = (itemValue = undefined) => {
   if (! filterValue) {
     return false;
   }
-  switch(filterValue) {
-    case 'middle':
-      return itemValue >= 10000 && itemValue <= 50000;
-    case 'low':
-      return itemValue < 10000;
-    case 'high':
-      return itemValue > 50000;
-  }
+
+  const PriceFilter = {
+    middle: itemValue >= 10000 && itemValue <= 50000,
+    low: itemValue < 10000,
+    high: itemValue > 50000
+  };
+
+  return PriceFilter[filterValue];
 };
 
 const acceptRooms = (itemValue = undefined) => {
