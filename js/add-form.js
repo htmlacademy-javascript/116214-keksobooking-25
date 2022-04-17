@@ -2,7 +2,7 @@ import { sendData } from './api.js';
 import { resetMap } from './map.js';
 import { getMessage } from './message.js';
 import { setOnChangePhotoInput, resetPreviews } from './photos-previewer.js';
-import { priceSlider, updateSliderMinPrice } from './price-slider.js';
+import { priceSlider, updateSliderMinPrice, PRICE_SLIDER_START_VALUE } from './price-slider.js';
 import { filterForm } from './filter-form.js';
 import { addFormValidator, renewAddFormValidator } from './add-form-validator.js';
 import { deactivateForm } from './forms-activity-handler.js';
@@ -44,7 +44,7 @@ const setMinPricePerNight = (housingType) => {
 const resetApp = () => {
   addForm.reset();
   resetPreviews();
-  priceSlider.noUiSlider.set(5000);
+  priceSlider.noUiSlider.set(PRICE_SLIDER_START_VALUE);
   filterForm.reset();
   resetMap();
 };

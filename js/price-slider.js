@@ -46,6 +46,11 @@ priceSlider.noUiSlider.on('update', () => {
   price.value = priceSlider.noUiSlider.get();
 });
 
-export { updateSliderMinPrice, disableSlider, priceSlider };
+export {
+  updateSliderMinPrice,
+  disableSlider,
+  priceSlider,
+  PRICE_SLIDER_START_VALUE
+};
 
 

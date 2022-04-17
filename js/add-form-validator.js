@@ -1,10 +1,5 @@
 const ROOM_NUMBER_NOT_FOR_GUESTS = '100';
 
-const addForm = document.querySelector('.ad-form');
-const capacity = addForm.querySelector('#capacity');
-const title = addForm.querySelector('#title');
-const roomNumber = addForm.querySelector('#room_number');
-
 const CAPACITY_PER_ROOM_NUMBER = {
   '1': [1],
   '2': [1, 2],
@@ -21,6 +16,14 @@ const PRISTINE_CONFIG = {
   errorTextClass: 'ad-form__error'
 };
 
+const TITLE_MIN_LENGTH = 30;
+const TITLE_MAX_LENGTH = 100;
+
+const addForm = document.querySelector('.ad-form');
+const capacity = addForm.querySelector('#capacity');
+const title = addForm.querySelector('#title');
+const roomNumber = addForm.querySelector('#room_number');
+
 let addFormValidator = new Pristine(addForm, PRISTINE_CONFIG, true);
 
 const getCapacityErrorMessage = () => {
@@ -34,7 +37,7 @@ const getCapacityErrorMessage = () => {
 };
 
 const renewAddFormValidator = () => {
-  addFormValidator = new Pristine(addForm, pristineConfig, true);
+  addFormValidator = new Pristine(addForm, PRISTINE_CONFIG, true);
 };
 
 addFormValidator.addValidator(
@@ -47,8 +50,8 @@ addFormValidator.addValidator(
 
 addFormValidator.addValidator(
   title,
-  (value) => value.length >= 30 && value.length <= 100,
-  'От 30 до 100 символов',
+  (value) => value.length >= TITLE_MIN_LENGTH && value.length <= TITLE_MAX_LENGTH,
+  `От ${TITLE_MIN_LENGTH} до ${TITLE_MAX_LENGTH} символов`,
   1,
   false
 );
