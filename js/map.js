@@ -1,4 +1,4 @@
-import { generateCard } from './generateCards.js';
+import { generateCard } from './generate-cards.js';
 import { setAddressFieldValue, filter } from './form.js';
 import { displayData } from './page.js';
 
