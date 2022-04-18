@@ -2,12 +2,12 @@ import { sendData } from './api.js';
 import { resetMap } from './map.js';
 import { getMessage } from './message.js';
 import { setOnChangePhotoInput, resetPreviews } from './photos-previewer.js';
-import { priceSlider, updateSliderMinPrice } from './price-slider.js';
+import { priceSlider, updateSliderMinPrice, PRICE_SLIDER_START_VALUE } from './price-slider.js';
 import { filterForm } from './filter-form.js';
-import { addFormValidator, renewAddFormValidator } from './add-form-validator.js';
+import { addFormValidator } from './add-form-validator.js';
 import { deactivateForm } from './forms-activity-handler.js';
 
-const minPricePerNight = {
+const MIN_PRICE_PER_NIGHT = {
   bungalow: 0,
   flat: 1000,
   hotel: 3000,
@@ -16,11 +16,8 @@ const minPricePerNight = {
 };
 
 const addForm = document.querySelector('.ad-form');
-const title = addForm.querySelector('#title');
 const type = addForm.querySelector('#type');
 const price = addForm.querySelector('#price');
-const roomNumber = addForm.querySelector('#room_number');
-const capacity = addForm.querySelector('#capacity');
 const timein = addForm.querySelector('#timein');
 const timeout = addForm.querySelector('#timeout');
 const address = addForm.querySelector('#address');
@@ -35,7 +32,7 @@ const setAddressFieldValue = (coordinates) => {
   address.value = `${coordinates.lat.toFixed(5)}, ${coordinates.lng.toFixed(5)}`;
 };
 
-const getMinPrice = (housingType) =>  minPricePerNight[housingType];
+const getMinPrice = (housingType) =>  MIN_PRICE_PER_NIGHT[housingType];
 
 const setMinPricePerNight = (housingType) => {
   const minPrice = getMinPrice(housingType);
@@ -47,7 +44,7 @@ const setMinPricePerNight = (housingType) => {
 const resetApp = () => {
   addForm.reset();
   resetPreviews();
-  priceSlider.noUiSlider.set(5000);
+  priceSlider.noUiSlider.set(PRICE_SLIDER_START_VALUE);
   filterForm.reset();
   resetMap();
 };
@@ -57,12 +54,12 @@ const showMessage = (messageType) => {
   document.body.insertAdjacentElement('beforeend', message);
 };
 
-const onSuccessAddForm = () => {
+const handleSendAddFormSuccess = () => {
   resetApp();
   showMessage('success');
 };
 
-const onErrorAddForm = () => {
+const handleSendAddFormError = () => {
   submitButton.disabled = false;
   showMessage('error');
 };
@@ -70,7 +67,6 @@ const onErrorAddForm = () => {
 type.addEventListener('change', (evt) => {
   const housingType = evt.target.value;
   setMinPricePerNight(housingType);
-  renewAddFormValidator();
   updateSliderMinPrice(getMinPrice(housingType));
 });
 
@@ -98,8 +94,8 @@ addForm.addEventListener('submit', (evt) => {
 
     sendData(
       formData,
-      onSuccessAddForm,
-      onErrorAddForm
+      handleSendAddFormSuccess,
+      handleSendAddFormError
     );
   }
 });
@@ -112,9 +108,6 @@ deactivateForm(addForm);
 export {
   addForm,
   price,
-  capacity,
-  title,
-  roomNumber,
   housingPreview,
   setAddressFieldValue,
   setMinPricePerNight

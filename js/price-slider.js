@@ -14,12 +14,8 @@ noUiSlider.create(priceSlider, {
   start: PRICE_SLIDER_START_VALUE,
   connect: 'lower',
   format: {
-    to: function(value) {
-      return value.toFixed();
-    },
-    from: function(value) {
-      return parseInt(value, 10).toFixed();
-    }
+    to: (value) => value.toFixed(),
+    from: (value) => parseInt(value, 10).toFixed()
   }
 });
 
@@ -46,6 +42,11 @@ priceSlider.noUiSlider.on('update', () => {
   price.value = priceSlider.noUiSlider.get();
 });
 
-export { updateSliderMinPrice, disableSlider, priceSlider };
+export {
+  updateSliderMinPrice,
+  disableSlider,
+  priceSlider,
+  PRICE_SLIDER_START_VALUE
+};
 
 

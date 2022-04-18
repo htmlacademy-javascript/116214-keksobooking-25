@@ -86,7 +86,7 @@ const compareAnnouncements = (a, b) => {
 
 const filterAnnouncements = (announcements) => announcements
   .slice()
-  .sort(compareAnnouncements)
-  .filter(({offer}) => getAnnouncementRank(offer) === filter.rank);
+  .filter(({offer}) => getAnnouncementRank(offer) === filter.rank)
+  .sort(compareAnnouncements);
 
 export { filterAnnouncements };

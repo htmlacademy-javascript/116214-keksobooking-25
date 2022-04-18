@@ -1,7 +1,9 @@
 import { activateForm } from './forms-activity-handler.js';
 import { filterForm, filter } from './filter-form.js';
 import { filterAnnouncements } from './announcements-filter.js';
-import { displayMarkers, SIMILAR_ANNOUNCEMENTS_COUNT } from './map.js';
+import { displayMarkers } from './map.js';
+
+const SIMILAR_ANNOUNCEMENTS_COUNT = 10;
 
 let announcmentsData = [];
 
@@ -15,7 +17,7 @@ const showDataNotLoadedError = (errorMessage) => {
   mapElement.appendChild(errorElement);
 };
 
-const onDataLoadFail = (errorMessage) => {
+const handleLoadDataError = (errorMessage) => {
   showDataNotLoadedError(errorMessage);
 };
 
@@ -37,7 +39,7 @@ const displayData = () => {
   return true;
 };
 
-const onDataLoadSuccess = (data) => {
+const handleLoadDataSuccess = (data) => {
   announcmentsData = data;
 
   if (displayData()) {
@@ -45,4 +47,4 @@ const onDataLoadSuccess = (data) => {
   }
 };
 
-export { onDataLoadFail, onDataLoadSuccess, displayData };
+export { handleLoadDataError, handleLoadDataSuccess, displayData };

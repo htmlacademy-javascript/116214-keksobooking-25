@@ -1,11 +1,11 @@
-const addContent = {
-  text(element, content) {
+const customDomContent = {
+  insertAsText(element, content) {
     element.textContent = content;
   },
-  html(element, content) {
+  insertAsHtml(element, content) {
     element.innerHTML = content;
   },
-  node(element, content) {
+  insertAsNode(element, content) {
     element.replaceChildren(content);
   }
 };
@@ -15,7 +15,7 @@ const populateElement = (element, content, mode) => {
     element.classList.add('hidden');
     return;
   }
-  addContent[mode](element, content);
+  customDomContent[mode](element, content);
 };
 
 const conformLIstToData = (list, data, classPrefix = '') => {
@@ -27,7 +27,7 @@ const conformLIstToData = (list, data, classPrefix = '') => {
   });
 };
 
-const generatListItemsByTemplate = (template, data, dataName) => {
+const generateListItemsByTemplate = (template, data, dataName) => {
   if (!data || !data.length) {
     return null;
   }
@@ -36,7 +36,7 @@ const generatListItemsByTemplate = (template, data, dataName) => {
 
   data.forEach((value) => {
     const item = template.cloneNode(true);
-    item[dataName] = value;
+    item[dataName] = String(value);
     fragment.appendChild(item);
   });
 
@@ -63,7 +63,7 @@ export {
   formatCapacity,
   formatTime,
   conformLIstToData,
-  generatListItemsByTemplate,
+  generateListItemsByTemplate,
   isEscape,
   debounce
 };

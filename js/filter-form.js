@@ -71,13 +71,13 @@ const debounceHandler = debounce(
   RERENDER_DELAY
 );
 
-const onFilterChange = (evt) => {
+const handleChangeFilter = (evt) => {
   setFilter(evt);
   debounceHandler();
 };
 
 filterForm.addEventListener('change', (evt) => {
-  onFilterChange(evt);
+  handleChangeFilter(evt);
 });
 
 deactivateForm(filterForm);
