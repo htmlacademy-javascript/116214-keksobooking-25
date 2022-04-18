@@ -10,12 +10,12 @@ const customDomContent = {
   }
 };
 
-const populateElement = (element, content, mode) => {
+const populateElement = (element, content, insertMode) => {
   if (! content) {
     element.classList.add('hidden');
     return;
   }
-  customDomContent[mode](element, content);
+  customDomContent[insertMode](element, content);
 };
 
 const conformLIstToData = (list, data, classPrefix = '') => {
