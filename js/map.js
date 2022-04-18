@@ -85,11 +85,11 @@ mainMarker.on('moveend', (evt) => {
   setAddressFieldValue(markerCoordinates);
 });
 
+mainMarker.addTo(interactiveMap);
+
 tileLayer.once('load', () => {
   activateForm(addForm);
   getData(handleLoadDataSuccess, handleLoadDataError);
 });
-
-mainMarker.addTo(interactiveMap);
 
 export { mainMarker, displayMarkers, resetMap };
