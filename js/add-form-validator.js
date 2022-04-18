@@ -24,7 +24,7 @@ const capacity = addForm.querySelector('#capacity');
 const title = addForm.querySelector('#title');
 const roomNumber = addForm.querySelector('#room_number');
 
-let addFormValidator = new Pristine(addForm, PRISTINE_CONFIG, true);
+const addFormValidator = new Pristine(addForm, PRISTINE_CONFIG, true);
 
 const getCapacityErrorMessage = () => {
   const possibleGuestCounts = CAPACITY_PER_ROOM_NUMBER[roomNumber.value];
@@ -34,10 +34,6 @@ const getCapacityErrorMessage = () => {
       'Не для гостей' :
       `Не более ${maxGuestCount} ${maxGuestCount === 1 ? 'гостья' : 'гостей'}`
   );
-};
-
-const updateAddFormValidator = () => {
-  addFormValidator = new Pristine(addForm, PRISTINE_CONFIG, true);
 };
 
 addFormValidator.addValidator(
@@ -56,4 +52,4 @@ addFormValidator.addValidator(
   false
 );
 
-export { addFormValidator, updateAddFormValidator };
+export { addFormValidator };
